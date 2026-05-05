@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { CalendarClient } from "@/components/calendar-client";
 import { EventCard } from "@/components/event-card";
@@ -6,6 +7,18 @@ import { MapClient } from "@/components/map-client";
 import { getEvents, getVenueWithEvents } from "@/lib/data";
 import { prisma } from "@/lib/prisma";
 import { formatEventDate } from "@/lib/utils";
+
+export const metadata: Metadata = {
+  alternates: { canonical: "/" },
+  description:
+    "Kraków has a growing English-language comedy scene: weekly stand-up nights, open mics for trying material, improv jams, and story-driven formats like slam storytelling. Krakow Comedy Calendar pulls listings together so you can see what is on, where it is on the map, and who runs each night, then links straight through to organisers' official event posts for full details and signup threads.",
+  openGraph: {
+    title: "English comedy nights in Kraków — curated calendar",
+    description:
+      "Stand-up, open mics, improv & stories across Kraków — dates, venues, organisers and links to official event pages.",
+    url: "/",
+  },
+};
 
 export default async function Home() {
   const [upcoming, venues, organisersRaw] = await Promise.all([
@@ -44,6 +57,9 @@ export default async function Home() {
 
   return (
     <div id="top" className="space-y-8 sm:space-y-12">
+      <h1 className="bg-gradient-to-r from-white via-violet-100 to-cyan-200 bg-clip-text text-center text-2xl font-semibold tracking-tight text-transparent sm:text-3xl">
+        English-language comedy nights in Kraków
+      </h1>
       <section className="rounded-2xl border-2 border-cyan-500/35 bg-zinc-900/60 p-4 text-base leading-relaxed text-zinc-100 ring-1 ring-cyan-500/10 sm:p-6">
         We are here to provide information about English language comedy events in Krakow. For full details,
         lineups, entry rules, and updates, always check each individual organiser event page directly.

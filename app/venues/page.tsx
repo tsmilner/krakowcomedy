@@ -1,11 +1,14 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { ExternalLinks } from "@/components/external-links";
 import { getVenueWithEvents } from "@/lib/data";
 import { formatEventDate } from "@/lib/utils";
 
-export const metadata = {
-  title: "Venues | Krakow Comedy Calendar",
-  description: "Comedy-friendly venues across Krakow with upcoming events.",
+export const metadata: Metadata = {
+  title: "Venues",
+  description:
+    "Bars and rooms across Kraków that host English stand-up, open mics, improv and storytelling — with addresses, vibe notes, and the next listings we track.",
+  alternates: { canonical: "/venues" },
 };
 
 export default async function VenuesPage() {

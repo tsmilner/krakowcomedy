@@ -1,7 +1,10 @@
 import Link from "next/link";
+import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { ExternalLinks } from "@/components/external-links";
+import { SeoJsonLd } from "@/components/seo-json-ld";
 import { prisma } from "@/lib/prisma";
+import { getSiteUrl } from "@/lib/site";
 import {
   buildGoogleCalendarUrl,
   eventTypeLabel,
@@ -43,6 +46,25 @@ export default async function EventDetailPage({ params }: EventDetailProps) {
   });
 
   if (!event) notFound();
+
+  const siteUrl = getSiteUrl();
+  const eventJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Event",
+    name: event.title,
+    description: event.description,
+    startDate: event.startDateTime.toISOString(),
+    ...(event.endDateTime ? { endDate: event.endDateTime.toISOString() } : {}),
+    eventAttendanceMode: "https://schema.org/OfflineEventAttendanceMode",
+    location: {
+      "@type": "Place",
+      name: event.venue.name,
+      address: event.venue.address,
+    },
+    organizer: { "@type": "Organization", name: event.organiser.name },
+    url: `${siteUrl}/events/${event.slug}`,
+  };
+
   const facebookUrl = event.facebookEventUrl;
   const facebookLabel = "Facebook Event Link";
   const googleCalendarUrl = buildGoogleCalendarUrl({
@@ -55,6 +77,7 @@ export default async function EventDetailPage({ params }: EventDetailProps) {
 
   return (
     <article className="relative space-y-8 overflow-hidden rounded-3xl border border-violet-500/35 bg-zinc-900/75 p-6 shadow-[0_0_48px_-14px_rgba(88,28,135,0.45)] ring-1 ring-cyan-500/15 sm:p-8">
+      <SeoJsonLd data={eventJsonLd} />
       <div
         className="pointer-events-none absolute -right-20 top-0 h-48 w-48 rounded-full bg-fuchsia-600/20 blur-3xl"
         aria-hidden

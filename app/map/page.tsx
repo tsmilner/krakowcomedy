@@ -1,9 +1,12 @@
+import type { Metadata } from "next";
 import { getVenueWithEvents } from "@/lib/data";
 import { MapClient } from "@/components/map-client";
 
-export const metadata = {
-  title: "Venue Map | Krakow Comedy Calendar",
-  description: "Interactive map of Krakow comedy venues and upcoming events.",
+export const metadata: Metadata = {
+  title: "Venue map",
+  description:
+    "Interactive map of Kraków comedy venues showing upcoming nights at each spot — tap a marker for dates and links to events.",
+  alternates: { canonical: "/map" },
 };
 
 type MapPageProps = {

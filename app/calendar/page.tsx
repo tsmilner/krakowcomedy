@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { EventLanguage, EventType } from "@prisma/client";
 import { CalendarClient } from "@/components/calendar-client";
 import { EventCard } from "@/components/event-card";
@@ -15,9 +16,11 @@ type CalendarPageProps = {
   }>;
 };
 
-export const metadata = {
-  title: "Calendar | Krakow Comedy Calendar",
-  description: "Monthly and list views of upcoming comedy events in Krakow.",
+export const metadata: Metadata = {
+  title: "Comedy calendar",
+  description:
+    "Month view of upcoming English-language comedy in Kraków — filter by date range, venue, organiser and event type. Pair it with event pages for official Facebook links and details.",
+  alternates: { canonical: "/calendar" },
 };
 
 export default async function CalendarPage({ searchParams }: CalendarPageProps) {

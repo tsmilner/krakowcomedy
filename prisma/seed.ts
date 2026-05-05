@@ -183,7 +183,7 @@ async function main() {
         startDateTime: new Date("2026-05-15T19:50:00+02:00"),
         eventType: EventType.OPEN_MIC,
         language: EventLanguage.ENGLISH,
-        facebookEventUrl: "https://fb.me/e/9n1ML2XeG",
+        facebookEventUrl: "https://www.facebook.com/events/854334386973245",
         venue: { connect: { slug: "bracka-4-poziom-1" } },
         organiser: { connect: { slug: "love-lub-comedy" } },
       },

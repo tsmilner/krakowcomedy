@@ -1,10 +1,13 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { prisma } from "@/lib/prisma";
 import { ExternalLinks } from "@/components/external-links";
 
-export const metadata = {
-  title: "Organisers | Krakow Comedy Calendar",
-  description: "Comedy organisers and communities shaping Krakow's live scene.",
+export const metadata: Metadata = {
+  title: "Organisers",
+  description:
+    "Who runs English-language comedy nights in Kraków — stand-up crews, open mic hosts, improv groups and story communities — with links to their official pages.",
+  alternates: { canonical: "/organisers" },
 };
 
 export default async function OrganisersPage() {

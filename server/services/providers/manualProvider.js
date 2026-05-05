@@ -29,7 +29,7 @@ const MANUAL_EVENTS = [
     },
     links: [
       {
-        url: "https://www.facebook.com/events/1489991542638579/",
+        url: "https://www.facebook.com/events/854334386973245",
         label: "Facebook event",
       },
     ],

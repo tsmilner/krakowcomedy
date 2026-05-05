@@ -78,6 +78,7 @@ export function VenueMap({
         ref={mapRef}
         center={[50.0614, 19.9366]}
         zoom={13}
+        scrollWheelZoom={false}
         className="h-full w-full"
       >
         <TileLayer attribution={CARTO_ATTRIBUTION} url={MAP_TILE_URL} />
