@@ -8,7 +8,7 @@ export const metadata = {
 };
 
 export default async function OrganisersPage() {
-  const organisers = await prisma.organiser.findMany({
+  const organisersRaw = await prisma.organiser.findMany({
     where: { slug: { not: "love-lub-comedy" } },
     include: {
       events: {
@@ -18,6 +18,13 @@ export default async function OrganisersPage() {
       },
     },
     orderBy: { name: "asc" },
+  });
+  const organisers = [...organisersRaw].sort((a, b) => {
+    const isBottom = (slug: string) => slug === "cozy-events" || slug === "improv-comedy-in-cracow";
+    const aBottom = isBottom(a.slug);
+    const bBottom = isBottom(b.slug);
+    if (aBottom !== bBottom) return aBottom ? 1 : -1;
+    return a.name.localeCompare(b.name);
   });
 
   return (
@@ -29,11 +36,19 @@ export default async function OrganisersPage() {
         {organisers.map((organiser) => {
           const isCozy = organiser.slug === "cozy-events";
           const isDzienTonic = organiser.slug === "dzien-tonic-story-slam";
+          const isNotGay = organiser.slug === "not-gay-at-all-comedy";
           const websiteUrl = isDzienTonic
             ? "https://www.facebook.com/profile.php?id=100083820738347"
             : organiser.websiteUrl;
-          const websiteLabel = isCozy ? "Meetup" : isDzienTonic ? "Andre San Miguel" : "Website";
+          const websiteLabel = isCozy
+            ? "Meetup"
+            : isDzienTonic
+              ? "André San Miguel"
+              : isNotGay
+                ? "Stan"
+                : "Website";
           const facebookLabel = isCozy ? "Facebook Group" : "Facebook Page";
+          const instagramLabel = isNotGay ? "Luke" : "Instagram";
 
           return (
             <article
@@ -49,6 +64,7 @@ export default async function OrganisersPage() {
                 websiteUrl={websiteUrl}
                 websiteLabel={websiteLabel}
                 facebookLabel={facebookLabel}
+                instagramLabel={instagramLabel}
                 facebookUrl={organiser.slug === "not-gay-at-all-comedy" ? null : organiser.facebookUrl}
                 instagramUrl={organiser.instagramUrl}
               />

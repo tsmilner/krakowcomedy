@@ -14,6 +14,8 @@ type EventCardProps = {
 };
 
 export function EventCard({ event }: EventCardProps) {
+  const facebookUrl = event.facebookEventUrl;
+  const facebookLabel = "Facebook Event Link";
   const googleCalendarUrl = buildGoogleCalendarUrl({
     title: event.title,
     startDateTime: event.startDateTime,
@@ -61,7 +63,8 @@ export function EventCard({ event }: EventCardProps) {
       </div>
       <p className="mb-4 line-clamp-3 text-sm leading-relaxed text-zinc-400">{event.description}</p>
       <ExternalLinks
-        facebookUrl={event.facebookEventUrl ?? event.organiser.facebookUrl}
+        facebookUrl={facebookUrl}
+        facebookLabel={facebookLabel}
         instagramUrl={event.instagramUrl}
         websiteUrl={event.websiteUrl}
         ticketUrl={event.ticketUrl}

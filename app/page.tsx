@@ -8,7 +8,7 @@ import { prisma } from "@/lib/prisma";
 import { formatEventDate } from "@/lib/utils";
 
 export default async function Home() {
-  const [upcoming, venues, organisers] = await Promise.all([
+  const [upcoming, venues, organisersRaw] = await Promise.all([
     getEvents({
       language: "",
       eventType: "",
@@ -34,6 +34,13 @@ export default async function Home() {
     end: event.endDateTime ? event.endDateTime.toISOString() : undefined,
     url: `/events/${event.slug}`,
   }));
+  const organisers = [...organisersRaw].sort((a, b) => {
+    const isBottom = (slug: string) => slug === "cozy-events" || slug === "improv-comedy-in-cracow";
+    const aBottom = isBottom(a.slug);
+    const bBottom = isBottom(b.slug);
+    if (aBottom !== bBottom) return aBottom ? 1 : -1;
+    return a.name.localeCompare(b.name);
+  });
 
   return (
     <div id="top" className="space-y-8 sm:space-y-12">
@@ -57,14 +64,6 @@ export default async function Home() {
       <section id="calendar" className="space-y-4 sm:space-y-5">
         <div>
           <h2 className="text-xl font-semibold tracking-tight text-zinc-50 sm:text-2xl">Calendar</h2>
-          <div className="mt-3">
-            <a
-              href="/api/calendar/all"
-              className="inline-flex items-center rounded-full border border-violet-400/50 bg-violet-900/60 px-4 py-2 text-sm font-semibold text-violet-100 shadow-[0_0_14px_-4px_rgba(168,85,247,0.5)] transition-colors hover:bg-violet-800/70 hover:text-white"
-            >
-              Add all events to my Google Calendar
-            </a>
-          </div>
         </div>
         <CalendarClient events={calendarEvents} compact />
       </section>
@@ -86,11 +85,19 @@ export default async function Home() {
           {organisers.map((organiser) => {
             const isCozy = organiser.slug === "cozy-events";
             const isDzienTonic = organiser.slug === "dzien-tonic-story-slam";
+            const isNotGay = organiser.slug === "not-gay-at-all-comedy";
             const websiteUrl = isDzienTonic
               ? "https://www.facebook.com/profile.php?id=100083820738347"
               : organiser.websiteUrl;
-            const websiteLabel = isCozy ? "Meetup" : isDzienTonic ? "Andre San Miguel" : "Website";
+            const websiteLabel = isCozy
+              ? "Meetup"
+              : isDzienTonic
+                ? "André San Miguel"
+                : isNotGay
+                  ? "Stan"
+                  : "Website";
             const facebookLabel = isCozy ? "Facebook Group" : "Facebook Page";
+            const instagramLabel = isNotGay ? "Luke" : "Instagram";
 
             return (
               <article
@@ -106,6 +113,7 @@ export default async function Home() {
                   websiteUrl={websiteUrl}
                   websiteLabel={websiteLabel}
                   facebookLabel={facebookLabel}
+                  instagramLabel={instagramLabel}
                   facebookUrl={organiser.slug === "not-gay-at-all-comedy" ? null : organiser.facebookUrl}
                   instagramUrl={organiser.instagramUrl}
                 />

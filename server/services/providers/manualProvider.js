@@ -69,7 +69,7 @@ const MANUAL_EVENTS = [
         label: "Facebook event",
       },
     ],
-    description: "Free English standup open mic hosted by Andre San Miguel, with local comedians and new material.",
+    description: "Free English standup open mic hosted by André San Miguel, with local comedians and new material.",
   },
 ];
 

@@ -48,14 +48,6 @@ export default async function CalendarPage({ searchParams }: CalendarPageProps) 
       <h1 className="bg-gradient-to-r from-white via-violet-100 to-cyan-200 bg-clip-text text-3xl font-semibold tracking-tight text-transparent">
         Comedy calendar
       </h1>
-      <div>
-        <a
-          href="/api/calendar/all"
-          className="inline-flex items-center rounded-full border border-violet-400/50 bg-violet-900/60 px-4 py-2 text-sm font-semibold text-violet-100 shadow-[0_0_14px_-4px_rgba(168,85,247,0.5)] transition-colors hover:bg-violet-800/70 hover:text-white"
-        >
-          Add all events to my Google Calendar
-        </a>
-      </div>
       <form className="grid gap-3 rounded-xl border border-violet-500/30 bg-zinc-900/70 p-4 shadow-[0_0_28px_-10px_rgba(124,58,237,0.35)] ring-1 ring-cyan-500/10 md:grid-cols-3">
         <input
           type="date"

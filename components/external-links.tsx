@@ -4,6 +4,7 @@ type LinkSet = {
   facebookUrl?: string | null;
   facebookLabel?: string;
   instagramUrl?: string | null;
+  instagramLabel?: string;
   websiteUrl?: string | null;
   websiteLabel?: string;
   ticketUrl?: string | null;
@@ -59,9 +60,10 @@ function CalendarIcon() {
   );
 }
 
-function getIcon(label: string) {
+function getIcon(label: string, url: string) {
+  if (url.includes("instagram.com")) return <InstagramIcon />;
   if (label.includes("Facebook")) return <FacebookIcon />;
-  if (label === "Andre San Miguel") return <FacebookIcon />;
+  if (label === "André San Miguel") return <FacebookIcon />;
   if (label === "Instagram") return <InstagramIcon />;
   if (label === "Meetup") return <MeetupIcon />;
   if (label === "Tickets") return <TicketIcon />;
@@ -73,6 +75,7 @@ export function ExternalLinks({
   facebookUrl,
   facebookLabel = "Facebook Event Link",
   instagramUrl,
+  instagramLabel = "Instagram",
   websiteUrl,
   websiteLabel = "Website",
   ticketUrl,
@@ -80,7 +83,7 @@ export function ExternalLinks({
 }: LinkSet) {
   const links = [
     { label: facebookLabel, url: facebookUrl },
-    { label: "Instagram", url: instagramUrl },
+    { label: instagramLabel, url: instagramUrl },
     { label: websiteLabel, url: websiteUrl },
     { label: "Tickets", url: ticketUrl },
     { label: "Add to Google Calendar", url: googleCalendarUrl },
@@ -107,7 +110,7 @@ export function ExternalLinks({
           )}
         >
           <span className="inline-flex items-center gap-1.5">
-            {getIcon(link.label)}
+            {getIcon(link.label, link.url)}
             <span>{link.label}</span>
           </span>
         </a>

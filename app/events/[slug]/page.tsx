@@ -43,6 +43,8 @@ export default async function EventDetailPage({ params }: EventDetailProps) {
   });
 
   if (!event) notFound();
+  const facebookUrl = event.facebookEventUrl;
+  const facebookLabel = "Facebook Event Link";
   const googleCalendarUrl = buildGoogleCalendarUrl({
     title: event.title,
     startDateTime: event.startDateTime,
@@ -109,7 +111,8 @@ export default async function EventDetailPage({ params }: EventDetailProps) {
         <div className="space-y-3 rounded-2xl border border-violet-500/30 bg-zinc-950/40 p-5 shadow-inner">
           <p className="text-xs font-semibold uppercase tracking-wide text-cyan-400/80">Links</p>
           <ExternalLinks
-            facebookUrl={event.facebookEventUrl ?? event.organiser.facebookUrl}
+            facebookUrl={facebookUrl}
+            facebookLabel={facebookLabel}
             instagramUrl={event.instagramUrl}
             websiteUrl={event.websiteUrl ?? event.venue.websiteUrl}
             ticketUrl={event.ticketUrl}

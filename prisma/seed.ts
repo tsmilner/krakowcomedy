@@ -29,7 +29,7 @@ async function main() {
         name: "Dzień Tonic",
         slug: "dzien-tonic-story-slam",
         description:
-          "English-language open mic in Krakow (The Dzień Tonic Show), hosted by Andre San Miguel.",
+          "English-language open mic in Krakow (The Dzień Tonic Show), hosted by André San Miguel.",
         websiteUrl: "https://www.facebook.com/profile.php?id=100083820738347",
         instagramUrl: "https://www.instagram.com/dzientonic/",
         facebookUrl: "https://www.facebook.com/profile.php?id=61555282495625",
@@ -52,6 +52,8 @@ async function main() {
         slug: "not-gay-at-all-comedy",
         description:
           "English stand-up open mic in Krakow hosted by Luke Dwornik-Longacre and Stanislav Kelberg.",
+        instagramUrl: "https://www.instagram.com/lukedwornikmusicandcomedy/",
+        websiteUrl: "https://www.instagram.com/stanscomedy",
       },
     }),
     prisma.organiser.create({
@@ -125,7 +127,7 @@ async function main() {
       data: {
         title: "The Dzien Tonic Show",
         slug: "the-dzien-tonic-show-2026-05-06",
-        description: "English stand-up open mic hosted by Andre San Miquel.",
+        description: "English stand-up open mic hosted by André San Miquel.",
         startDateTime: new Date("2026-05-06T20:00:00+02:00"),
         eventType: EventType.OPEN_MIC,
         language: EventLanguage.ENGLISH,
@@ -168,6 +170,7 @@ async function main() {
         startDateTime: new Date("2026-05-07T20:00:00+02:00"),
         eventType: EventType.IMPROV,
         language: EventLanguage.ENGLISH,
+        facebookEventUrl: "https://www.facebook.com/events/1489991542638579/",
         venue: { connect: { slug: "cafe-szafe" } },
         organiser: { connect: { slug: "improv-comedy-in-cracow" } },
       },
