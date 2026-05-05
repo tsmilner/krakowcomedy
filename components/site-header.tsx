@@ -2,8 +2,8 @@ import Image from "next/image";
 import Link from "next/link";
 
 const links = [
-  { href: "/#organisers", label: "Organisers" },
   { href: "/#calendar", label: "Calendar" },
+  { href: "/#organisers", label: "Organisers" },
   { href: "/#map", label: "Map" },
   { href: "/#venues", label: "Venues" },
 ];
@@ -26,7 +26,7 @@ export function SiteHeader() {
             priority
           />
         </Link>
-        <nav className="flex w-full max-w-2xl flex-nowrap items-center justify-center gap-1 sm:gap-2 border-t border-violet-500/20 pt-4 text-[0.92rem] sm:text-lg">
+        <nav className="mx-auto flex w-full flex-nowrap items-center justify-center gap-1 border-t border-violet-500/20 pt-4 text-[0.92rem] sm:gap-2 sm:text-lg">
           {links.map((link) => (
             <Link
               key={link.href}

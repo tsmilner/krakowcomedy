@@ -33,6 +33,7 @@ export default async function OrganisersPage() {
             ? "https://www.facebook.com/profile.php?id=100083820738347"
             : organiser.websiteUrl;
           const websiteLabel = isCozy ? "Meetup" : isDzienTonic ? "Andre San Miguel" : "Website";
+          const facebookLabel = isCozy ? "Facebook Group" : "Facebook Page";
 
           return (
             <article
@@ -47,6 +48,7 @@ export default async function OrganisersPage() {
               <ExternalLinks
                 websiteUrl={websiteUrl}
                 websiteLabel={websiteLabel}
+                facebookLabel={facebookLabel}
                 facebookUrl={organiser.slug === "not-gay-at-all-comedy" ? null : organiser.facebookUrl}
                 instagramUrl={organiser.instagramUrl}
               />

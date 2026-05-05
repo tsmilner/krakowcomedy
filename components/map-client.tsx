@@ -19,6 +19,12 @@ type VenueMapData = {
   events: { id: number; title: string; slug: string }[];
 };
 
-export function MapClient({ venues }: { venues: VenueMapData[] }) {
-  return <VenueMap venues={venues} />;
+export function MapClient({
+  venues,
+  highlightedVenueSlug,
+}: {
+  venues: VenueMapData[];
+  highlightedVenueSlug?: string;
+}) {
+  return <VenueMap venues={venues} highlightedVenueSlug={highlightedVenueSlug} />;
 }

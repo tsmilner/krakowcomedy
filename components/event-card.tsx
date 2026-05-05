@@ -1,6 +1,12 @@
 import Link from "next/link";
 import { Event, Organiser, Venue } from "@prisma/client";
-import { eventTypeLabel, formatEventDate, formatEventTime, languageLabel } from "@/lib/utils";
+import {
+  buildGoogleCalendarUrl,
+  eventTypeLabel,
+  formatEventDate,
+  formatEventTime,
+  languageLabel,
+} from "@/lib/utils";
 import { ExternalLinks } from "./external-links";
 
 type EventCardProps = {
@@ -8,6 +14,13 @@ type EventCardProps = {
 };
 
 export function EventCard({ event }: EventCardProps) {
+  const googleCalendarUrl = buildGoogleCalendarUrl({
+    title: event.title,
+    startDateTime: event.startDateTime,
+    endDateTime: event.endDateTime,
+    description: event.description,
+    location: event.venue.address,
+  });
   return (
     <article className="group relative overflow-hidden rounded-2xl border-2 border-violet-500/35 bg-zinc-900/70 p-4 sm:p-5 shadow-[0_0_32px_-12px_rgba(88,28,135,0.45)] ring-1 ring-cyan-500/15 transition-[box-shadow,transform,border-color] duration-200 hover:-translate-y-0.5 hover:border-fuchsia-400/50 hover:shadow-[0_0_40px_-8px_rgba(217,70,239,0.35)]">
       <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-cyan-400/50 to-transparent opacity-0 transition-opacity duration-200 group-hover:opacity-100" />
@@ -29,7 +42,13 @@ export function EventCard({ event }: EventCardProps) {
       <p className="mb-3 text-sm text-zinc-400">
         <span className="font-medium text-zinc-200">{formatEventDate(event.startDateTime)}</span>{" "}
         <span className="text-violet-500/80">·</span> {formatEventTime(event.startDateTime)}{" "}
-        <span className="text-violet-500/80">·</span> {event.venue.name}
+        <span className="text-violet-500/80">·</span>{" "}
+        <Link
+          href={`/map?venue=${event.venue.slug}`}
+          className="font-medium text-cyan-200 underline decoration-fuchsia-500/40 underline-offset-2 hover:text-fuchsia-200"
+        >
+          {event.venue.name}
+        </Link>
       </p>
       <div className="mb-3 flex flex-wrap items-center gap-2">
         <span className="rounded-full border border-zinc-600/80 bg-zinc-950/60 px-2.5 py-0.5 text-xs font-medium text-zinc-300">
@@ -42,10 +61,11 @@ export function EventCard({ event }: EventCardProps) {
       </div>
       <p className="mb-4 line-clamp-3 text-sm leading-relaxed text-zinc-400">{event.description}</p>
       <ExternalLinks
-        facebookUrl={event.facebookEventUrl}
+        facebookUrl={event.facebookEventUrl ?? event.organiser.facebookUrl}
         instagramUrl={event.instagramUrl}
         websiteUrl={event.websiteUrl}
         ticketUrl={event.ticketUrl}
+        googleCalendarUrl={googleCalendarUrl}
       />
     </article>
   );

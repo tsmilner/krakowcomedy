@@ -125,7 +125,7 @@ async function main() {
       data: {
         title: "The Dzien Tonic Show",
         slug: "the-dzien-tonic-show-2026-05-06",
-        description: "English stand-up open mic hosted by Dzień Tonic.",
+        description: "English stand-up open mic hosted by Andre San Miquel.",
         startDateTime: new Date("2026-05-06T20:00:00+02:00"),
         eventType: EventType.OPEN_MIC,
         language: EventLanguage.ENGLISH,
@@ -151,7 +151,7 @@ async function main() {
       data: {
         title: "Not Gay At All Open Mic",
         slug: "not-gay-at-all-open-mic-2026-05-20",
-        description: "English stand-up open mic by Luke and Stan.",
+        description: "English stand-up open mic by Luke Dwornik-Longacre and Stanislav Kelberg.",
         startDateTime: new Date("2026-05-20T20:00:00+02:00"),
         eventType: EventType.OPEN_MIC,
         language: EventLanguage.ENGLISH,
@@ -180,7 +180,7 @@ async function main() {
         startDateTime: new Date("2026-05-15T19:50:00+02:00"),
         eventType: EventType.OPEN_MIC,
         language: EventLanguage.ENGLISH,
-        facebookEventUrl: "https://www.facebook.com/events/1489991542638579/",
+        facebookEventUrl: "https://fb.me/e/9n1ML2XeG",
         venue: { connect: { slug: "bracka-4-poziom-1" } },
         organiser: { connect: { slug: "love-lub-comedy" } },
       },

@@ -69,7 +69,7 @@ export async function getFeaturedEvents() {
 export async function getVenueWithEvents() {
   const { start, end } = defaultUpcomingStartEnd();
   const listingWindow = { gte: start, lte: end };
-  return prisma.venue.findMany({
+  const venues = await prisma.venue.findMany({
     where: {
       events: {
         some: { startDateTime: listingWindow },
@@ -85,19 +85,41 @@ export async function getVenueWithEvents() {
     },
     orderBy: { name: "asc" },
   });
+
+  return venues.sort((a, b) => {
+    const aNext = a.events[0]?.startDateTime?.getTime() ?? Number.POSITIVE_INFINITY;
+    const bNext = b.events[0]?.startDateTime?.getTime() ?? Number.POSITIVE_INFINITY;
+    if (aNext !== bNext) return aNext - bNext;
+    return a.name.localeCompare(b.name);
+  });
 }
 
 /** Venues that have at least one event in the default listings window (e.g. calendar filter). */
 export async function getVenuesWithUpcomingListings() {
   const { start, end } = defaultUpcomingStartEnd();
   const listingWindow = { gte: start, lte: end };
-  return prisma.venue.findMany({
+  const venues = await prisma.venue.findMany({
     where: {
       events: {
         some: { startDateTime: listingWindow },
       },
     },
-    orderBy: { name: "asc" },
-    select: { id: true, name: true },
+    include: {
+      events: {
+        where: { startDateTime: listingWindow },
+        select: { startDateTime: true },
+        orderBy: { startDateTime: "asc" },
+        take: 1,
+      },
+    },
   });
+
+  return venues
+    .sort((a, b) => {
+      const aNext = a.events[0]?.startDateTime?.getTime() ?? Number.POSITIVE_INFINITY;
+      const bNext = b.events[0]?.startDateTime?.getTime() ?? Number.POSITIVE_INFINITY;
+      if (aNext !== bNext) return aNext - bNext;
+      return a.name.localeCompare(b.name);
+    })
+    .map((venue) => ({ id: venue.id, name: venue.name }));
 }

@@ -27,3 +27,29 @@ export function slugify(value: string) {
     .replace(/\s+/g, "-")
     .replace(/-+/g, "-");
 }
+
+function toGoogleDateTime(date: Date) {
+  return date.toISOString().replace(/[-:]/g, "").replace(/\.\d{3}Z$/, "Z");
+}
+
+export function buildGoogleCalendarUrl(input: {
+  title: string;
+  startDateTime: Date;
+  endDateTime?: Date | null;
+  description?: string | null;
+  location?: string | null;
+}) {
+  const start = input.startDateTime;
+  const end = input.endDateTime ?? new Date(start.getTime() + 2 * 60 * 60 * 1000);
+  const params = new URLSearchParams({
+    action: "TEMPLATE",
+    text: input.title,
+    dates: `${toGoogleDateTime(start)}/${toGoogleDateTime(end)}`,
+  });
+
+  if (input.description) params.set("details", input.description);
+  if (input.location) params.set("location", input.location);
+
+  return `https://calendar.google.com/calendar/render?${params.toString()}`;
+}
+

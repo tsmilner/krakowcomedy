@@ -1,6 +1,7 @@
 "use client";
 import "leaflet/dist/leaflet.css";
 import L from "leaflet";
+import { useEffect, useMemo, useRef } from "react";
 import { MapContainer, Marker, Popup, TileLayer } from "react-leaflet";
 import Link from "next/link";
 
@@ -33,13 +34,48 @@ type VenueMapData = {
   events: { id: number; title: string; slug: string }[];
 };
 
-export function VenueMap({ venues }: { venues: VenueMapData[] }) {
+export function VenueMap({
+  venues,
+  highlightedVenueSlug,
+}: {
+  venues: VenueMapData[];
+  highlightedVenueSlug?: string;
+}) {
+  const mapRef = useRef<L.Map | null>(null);
+  const markerRefs = useRef<Record<string, L.Marker | null>>({});
+  const highlightedVenue = useMemo(
+    () => venues.find((venue) => venue.slug === highlightedVenueSlug),
+    [venues, highlightedVenueSlug],
+  );
+
+  useEffect(() => {
+    if (!highlightedVenue) return;
+    const marker = markerRefs.current[highlightedVenue.slug];
+    const map = mapRef.current;
+    if (!marker || !map) return;
+    map.setView([highlightedVenue.latitude, highlightedVenue.longitude], 15, { animate: true });
+    marker.openPopup();
+  }, [highlightedVenue]);
+
   return (
     <div className="relative h-[360px] overflow-hidden rounded-2xl border border-violet-500/35 bg-zinc-900/80 shadow-[0_0_40px_-12px_rgba(124,58,237,0.45)] ring-1 ring-cyan-500/15 sm:h-[460px]">
-      <MapContainer center={[50.0614, 19.9366]} zoom={13} className="h-full w-full">
+      <MapContainer
+        center={[50.0614, 19.9366]}
+        zoom={13}
+        className="h-full w-full"
+        whenReady={(event) => {
+          mapRef.current = event.target;
+        }}
+      >
         <TileLayer attribution={CARTO_ATTRIBUTION} url={MAP_TILE_URL} />
         {venues.map((venue) => (
-          <Marker key={venue.id} position={[venue.latitude, venue.longitude]}>
+          <Marker
+            key={venue.id}
+            position={[venue.latitude, venue.longitude]}
+            ref={(marker) => {
+              markerRefs.current[venue.slug] = marker;
+            }}
+          >
             <Popup>
               <div className="space-y-3 text-base text-white">
                 <h3 className="text-lg font-bold text-white">{venue.name}</h3>

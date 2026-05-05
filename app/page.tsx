@@ -82,6 +82,7 @@ export default async function Home() {
               ? "https://www.facebook.com/profile.php?id=100083820738347"
               : organiser.websiteUrl;
             const websiteLabel = isCozy ? "Meetup" : isDzienTonic ? "Andre San Miguel" : "Website";
+            const facebookLabel = isCozy ? "Facebook Group" : "Facebook Page";
 
             return (
               <article
@@ -96,6 +97,7 @@ export default async function Home() {
                 <ExternalLinks
                   websiteUrl={websiteUrl}
                   websiteLabel={websiteLabel}
+                  facebookLabel={facebookLabel}
                   facebookUrl={organiser.slug === "not-gay-at-all-comedy" ? null : organiser.facebookUrl}
                   instagramUrl={organiser.instagramUrl}
                 />
@@ -144,7 +146,14 @@ export default async function Home() {
               key={venue.id}
               className="rounded-2xl border-2 border-violet-500/35 bg-zinc-900/70 p-4 shadow-[0_0_28px_-10px_rgba(124,58,237,0.4)] ring-1 ring-cyan-500/10 transition-[box-shadow,border-color] hover:border-fuchsia-400/45 hover:shadow-[0_0_36px_-8px_rgba(217,70,239,0.3)] sm:p-6"
             >
-              <h3 className="text-lg font-semibold tracking-tight text-zinc-50">{venue.name}</h3>
+              <h3 className="text-lg font-semibold tracking-tight">
+                <Link
+                  href={`/map?venue=${venue.slug}`}
+                  className="text-cyan-200 underline decoration-fuchsia-500/40 underline-offset-2 transition-colors hover:text-fuchsia-200"
+                >
+                  {venue.name}
+                </Link>
+              </h3>
               <p className="mt-1.5 text-sm text-zinc-500">
                 {venue.address}
                 {venue.area ? ` · ${venue.area}` : ""}

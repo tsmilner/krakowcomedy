@@ -2,7 +2,13 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ExternalLinks } from "@/components/external-links";
 import { prisma } from "@/lib/prisma";
-import { eventTypeLabel, formatEventDate, formatEventTime, languageLabel } from "@/lib/utils";
+import {
+  buildGoogleCalendarUrl,
+  eventTypeLabel,
+  formatEventDate,
+  formatEventTime,
+  languageLabel,
+} from "@/lib/utils";
 
 type EventDetailProps = {
   params: Promise<{ slug: string }>;
@@ -37,6 +43,13 @@ export default async function EventDetailPage({ params }: EventDetailProps) {
   });
 
   if (!event) notFound();
+  const googleCalendarUrl = buildGoogleCalendarUrl({
+    title: event.title,
+    startDateTime: event.startDateTime,
+    endDateTime: event.endDateTime,
+    description: event.description,
+    location: event.venue.address,
+  });
 
   return (
     <article className="relative space-y-8 overflow-hidden rounded-3xl border border-violet-500/35 bg-zinc-900/75 p-6 shadow-[0_0_48px_-14px_rgba(88,28,135,0.45)] ring-1 ring-cyan-500/15 sm:p-8">
@@ -75,7 +88,14 @@ export default async function EventDetailPage({ params }: EventDetailProps) {
         <dl className="space-y-3 rounded-2xl border border-zinc-700/70 bg-zinc-950/50 p-5 text-sm">
           <div>
             <dt className="text-xs font-semibold uppercase tracking-wide text-fuchsia-400/80">Venue</dt>
-            <dd className="mt-1 font-medium text-zinc-100">{event.venue.name}</dd>
+            <dd className="mt-1 font-medium">
+              <Link
+                href={`/map?venue=${event.venue.slug}`}
+                className="text-cyan-200 underline decoration-fuchsia-500/40 underline-offset-2 hover:text-fuchsia-200"
+              >
+                {event.venue.name}
+              </Link>
+            </dd>
           </div>
           <div>
             <dt className="text-xs font-semibold uppercase tracking-wide text-fuchsia-400/80">Address</dt>
@@ -89,10 +109,11 @@ export default async function EventDetailPage({ params }: EventDetailProps) {
         <div className="space-y-3 rounded-2xl border border-violet-500/30 bg-zinc-950/40 p-5 shadow-inner">
           <p className="text-xs font-semibold uppercase tracking-wide text-cyan-400/80">Links</p>
           <ExternalLinks
-            facebookUrl={event.facebookEventUrl}
+            facebookUrl={event.facebookEventUrl ?? event.organiser.facebookUrl}
             instagramUrl={event.instagramUrl}
             websiteUrl={event.websiteUrl ?? event.venue.websiteUrl}
             ticketUrl={event.ticketUrl}
+            googleCalendarUrl={googleCalendarUrl}
           />
         </div>
       </div>

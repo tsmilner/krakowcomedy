@@ -22,7 +22,14 @@ export default async function VenuesPage() {
             key={venue.id}
             className="rounded-xl border border-violet-500/30 bg-zinc-900/70 p-5 shadow-[0_0_28px_-10px_rgba(124,58,237,0.35)] ring-1 ring-cyan-500/10"
           >
-            <h2 className="text-xl font-semibold text-zinc-50">{venue.name}</h2>
+            <h2 className="text-xl font-semibold">
+              <Link
+                href={`/map?venue=${venue.slug}`}
+                className="text-cyan-200 underline decoration-fuchsia-500/40 underline-offset-2 hover:text-fuchsia-200"
+              >
+                {venue.name}
+              </Link>
+            </h2>
             <p className="mt-1 text-sm text-zinc-500">
               {venue.address} {venue.area ? `- ${venue.area}` : ""}
             </p>
