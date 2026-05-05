@@ -75,12 +75,10 @@ export function VenueMap({
   return (
     <div className="relative h-[360px] overflow-hidden rounded-2xl border border-violet-500/35 bg-zinc-900/80 shadow-[0_0_40px_-12px_rgba(124,58,237,0.45)] ring-1 ring-cyan-500/15 sm:h-[460px]">
       <MapContainer
+        ref={mapRef}
         center={[50.0614, 19.9366]}
         zoom={13}
         className="h-full w-full"
-        whenReady={(event) => {
-          mapRef.current = event.target;
-        }}
       >
         <TileLayer attribution={CARTO_ATTRIBUTION} url={MAP_TILE_URL} />
         {venues.map((venue) => (
