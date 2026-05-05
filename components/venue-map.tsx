@@ -50,11 +50,26 @@ export function VenueMap({
 
   useEffect(() => {
     if (!highlightedVenue) return;
-    const marker = markerRefs.current[highlightedVenue.slug];
-    const map = mapRef.current;
-    if (!marker || !map) return;
-    map.setView([highlightedVenue.latitude, highlightedVenue.longitude], 15, { animate: true });
-    marker.openPopup();
+    let attempts = 0;
+    const maxAttempts = 20;
+
+    const openHighlightedPopup = () => {
+      const marker = markerRefs.current[highlightedVenue.slug];
+      const map = mapRef.current;
+
+      if (marker && map) {
+        map.setView([highlightedVenue.latitude, highlightedVenue.longitude], 15, { animate: true });
+        marker.openPopup();
+        return;
+      }
+
+      if (attempts < maxAttempts) {
+        attempts += 1;
+        window.setTimeout(openHighlightedPopup, 120);
+      }
+    };
+
+    openHighlightedPopup();
   }, [highlightedVenue]);
 
   return (
@@ -84,7 +99,7 @@ export function VenueMap({
                   href={googleMapsDirectionsUrl(venue.latitude, venue.longitude)}
                   target="_blank"
                   rel="noreferrer"
-                  className="popup-button inline-flex w-full items-center justify-center rounded-full border-2 border-blue-200/90 bg-blue-700 px-3.5 py-2.5 text-center text-base font-bold tracking-[0.01em] text-white shadow-sm hover:bg-blue-600"
+                  className="popup-button inline-flex w-full items-center justify-center rounded-full border-2 border-violet-300/80 bg-violet-700 px-3.5 py-2.5 text-center text-base font-bold tracking-[0.01em] text-white shadow-sm hover:bg-violet-600"
                 >
                   Get directions
                 </a>
