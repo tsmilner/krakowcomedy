@@ -1,0 +1,44 @@
+{
+  "name": "krakow-comedy",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "dev:3001": "next dev --port 3001",
+    "dev:express": "node --watch server/index.js",
+    "build": "next build",
+    "start": "next start",
+    "start:3001": "next start --port 3001",
+    "start:express": "node server/index.js",
+    "sync:facebook": "tsx scripts/sync-facebook-events.ts"
+  },
+  "dependencies": {
+    "@fullcalendar/daygrid": "^6.1.20",
+    "@fullcalendar/interaction": "^6.1.20",
+    "@fullcalendar/list": "^6.1.20",
+    "@fullcalendar/react": "^6.1.20",
+    "@prisma/client": "^6.19.2",
+    "clsx": "^2.1.1",
+    "date-fns": "^4.1.0",
+    "express": "^5.2.1",
+    "fullcalendar": "^6.1.20",
+    "leaflet": "^1.9.4",
+    "next": "16.2.1",
+    "prisma": "^6.19.2",
+    "react": "19.2.4",
+    "react-dom": "19.2.4",
+    "react-leaflet": "^5.0.0"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4",
+    "@types/leaflet": "^1.9.21",
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "eslint": "^9",
+    "eslint-config-next": "16.2.1",
+    "tailwindcss": "^4",
+    "tsx": "^4.21.0",
+    "typescript": "^5"
+  }
+}

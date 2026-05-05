@@ -1,0 +1,100 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Get a free hosted Postgres database in seconds: `npx create-db`
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+enum EventType {
+  STAND_UP
+  IMPROV
+  STORY_SLAM
+  OPEN_MIC
+  SHOWCASE
+}
+
+enum EventLanguage {
+  ENGLISH
+  POLISH
+  BILINGUAL
+}
+
+model Venue {
+  id           Int      @id @default(autoincrement())
+  name         String
+  slug         String   @unique
+  address      String
+  latitude     Float
+  longitude    Float
+  area         String?
+  description  String
+  websiteUrl   String?
+  facebookUrl  String?
+  instagramUrl String?
+  events       Event[]
+}
+
+model Organiser {
+  id           Int      @id @default(autoincrement())
+  name         String
+  slug         String   @unique
+  description  String
+  websiteUrl   String?
+  facebookUrl  String?
+  instagramUrl String?
+  events       Event[]
+}
+
+model Event {
+  id                 Int           @id @default(autoincrement())
+  title              String
+  slug               String        @unique
+  description        String
+  startDateTime      DateTime
+  endDateTime        DateTime?
+  eventType          EventType
+  language           EventLanguage
+  ticketUrl          String?
+  facebookEventUrl   String?
+  instagramUrl       String?
+  websiteUrl         String?
+  sourceNotes        String?
+  externalSourceName String?
+  isFeatured         Boolean       @default(false)
+  isRecurring        Boolean       @default(false)
+  createdAt          DateTime      @default(now())
+  updatedAt          DateTime      @updatedAt
+  venueId            Int
+  organiserId        Int
+  venue              Venue         @relation(fields: [venueId], references: [id], onDelete: Restrict)
+  organiser          Organiser     @relation(fields: [organiserId], references: [id], onDelete: Restrict)
+  tags               EventTag[]
+
+  @@index([startDateTime])
+  @@index([eventType])
+  @@index([language])
+  @@index([venueId])
+  @@index([organiserId])
+}
+
+model Tag {
+  id     Int        @id @default(autoincrement())
+  name   String     @unique
+  events EventTag[]
+}
+
+model EventTag {
+  eventId Int
+  tagId   Int
+  event   Event @relation(fields: [eventId], references: [id], onDelete: Cascade)
+  tag     Tag   @relation(fields: [tagId], references: [id], onDelete: Cascade)
+
+  @@id([eventId, tagId])
+}

@@ -1,0 +1,153 @@
+@import "tailwindcss";
+
+:root {
+  --background: #09090b;
+  --foreground: #fafafa;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+html {
+  font-size: 16px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 17px;
+  }
+}
+
+body {
+  color: #ffffff;
+  font-family: var(--font-geist-sans), system-ui, sans-serif;
+  background-color: #09090b;
+  line-height: 1.6;
+}
+
+/* Keep body copy consistently readable across pages. */
+main p,
+main li {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: #ffffff;
+}
+
+/* FullCalendar — dark + neon (scoped via .fc on same tree) */
+.fc {
+  --fc-page-bg-color: #18181b;
+  --fc-neutral-bg-color: #27272a;
+  --fc-neutral-text-color: #a1a1aa;
+  --fc-border-color: #3f3f46;
+  --fc-button-text-color: #fafafa;
+  --fc-button-bg-color: #7c3aed;
+  --fc-button-border-color: #a78bfa;
+  --fc-button-hover-bg-color: #6d28d9;
+  --fc-button-hover-border-color: #c4b5fd;
+  --fc-button-active-bg-color: #5b21b6;
+  --fc-button-active-border-color: #ddd6fe;
+  --fc-today-bg-color: rgba(34, 211, 238, 0.12);
+  --fc-highlight-color: rgba(217, 70, 239, 0.18);
+  --fc-now-indicator-color: #22d3ee;
+  --fc-list-event-hover-bg-color: #27272a;
+}
+
+.fc .fc-toolbar-title {
+  font-size: 1.05rem;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: #fafafa;
+  text-shadow: 0 0 18px rgba(167, 139, 250, 0.35);
+}
+
+.fc .fc-toolbar.fc-header-toolbar {
+  margin-bottom: 0.75rem;
+}
+
+.fc .fc-button {
+  padding: 0.32rem 0.55rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  border-radius: 0.5rem;
+  box-shadow: 0 0 12px rgba(124, 58, 237, 0.35);
+}
+
+.fc .fc-button:disabled {
+  opacity: 0.45;
+}
+
+.fc .fc-button-primary:not(:disabled):active,
+.fc .fc-button-primary:not(:disabled).fc-button-active {
+  box-shadow: 0 0 16px rgba(34, 211, 238, 0.45);
+}
+
+.fc .fc-daygrid-day-number {
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: #a1a1aa;
+}
+
+.fc .fc-daygrid-event {
+  font-size: 0.7rem;
+  font-weight: 600;
+  border-radius: 0.35rem;
+  border-color: rgba(167, 139, 250, 0.6) !important;
+  background: linear-gradient(135deg, rgba(88, 28, 135, 0.85), rgba(126, 34, 206, 0.75)) !important;
+  color: #fafafa !important;
+}
+
+.fc .fc-col-header-cell {
+  color: #d4d4d8;
+}
+
+.fc .fc-daygrid-day.fc-day-today {
+  background: rgba(34, 211, 238, 0.1) !important;
+}
+
+.fc .fc-scrollgrid,
+.fc .fc-scrollgrid-section,
+.fc .fc-theme-standard td,
+.fc .fc-theme-standard th {
+  border-color: #3f3f46;
+}
+
+.fc .fc-list-day-cushion,
+.fc .fc-list-event {
+  background: #18181b;
+  color: #e4e4e7;
+}
+
+.fc .fc-list-event:hover td {
+  background: #27272a;
+}
+
+/* Leaflet — dark popups to match neon UI */
+.leaflet-popup-content-wrapper {
+  background: #18181b !important;
+  color: #e4e4e7 !important;
+  border: 1px solid rgba(139, 92, 246, 0.45) !important;
+  border-radius: 0.75rem !important;
+  box-shadow: 0 0 28px -6px rgba(124, 58, 237, 0.45), 0 0 16px -4px rgba(34, 211, 238, 0.15) !important;
+}
+
+.leaflet-popup-tip {
+  background: #18181b !important;
+  border: 1px solid rgba(139, 92, 246, 0.45) !important;
+}
+
+.leaflet-popup-content {
+  margin: 0.75rem 0.85rem !important;
+  min-width: 10rem;
+}
+
+.leaflet-popup-content a {
+  color: #67e8f9;
+}
+
+.leaflet-popup-content a:hover {
+  color: #f0abfc;
+}

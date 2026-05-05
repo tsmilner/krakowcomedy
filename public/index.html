@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Krakow Comedy | English Comedy Shows in Krakow</title>
+    <meta
+      name="description"
+      content="Find English-language stand-up comedy, open mics, and storytelling nights in Krakow, with dates, venues, maps, and organizer links."
+    />
+    <meta name="robots" content="index, follow" />
+    <meta name="theme-color" content="#f5f6f7" />
+    <link rel="canonical" href="__CANONICAL_URL__" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Krakow Comedy | English Comedy Shows in Krakow" />
+    <meta
+      property="og:description"
+      content="Find English-language stand-up comedy, open mics, and storytelling nights in Krakow."
+    />
+    <meta property="og:url" content="__CANONICAL_URL__" />
+    <meta property="og:site_name" content="Krakow Comedy" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="Krakow Comedy | English Comedy Shows in Krakow" />
+    <meta
+      name="twitter:description"
+      content="Find English-language stand-up comedy, open mics, and storytelling nights in Krakow."
+    />
+    <script type="application/ld+json">
+      __STRUCTURED_DATA__
+    </script>
+    <link rel="preconnect" href="https://unpkg.com" />
+    <link rel="preconnect" href="https://tile.openstreetmap.org" />
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+      integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+      crossorigin=""
+    />
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <div class="app">
+      <header class="topbar">
+        <h1>Krakow Comedy</h1>
+        <p>English-language comedy shows, open mics, and storytelling nights in Krakow.</p>
+      </header>
+
+      <section class="organisers-panel" aria-labelledby="organisers-heading">
+        <h2 id="organisers-heading">Comedy Organisers</h2>
+        <div class="organiser-list">
+          <article class="organiser-card">
+            <img class="organiser-logo dzien-tonic-logo" src="/dzien-tonic-logo.svg" alt="Dzien Tonic logo" />
+            <h3>Dzien Tonic</h3>
+            <p>English stand-up open mic nights in Krakow.</p>
+            <div class="event-links">
+              <a class="event-link" href="https://www.facebook.com/profile.php?id=61555282495625" target="_blank" rel="noreferrer">Dzien Tonic</a>
+              <a class="event-link" href="https://www.facebook.com/profile.php?id=100083820738347" target="_blank" rel="noreferrer">Andre San Miguel</a>
+            </div>
+          </article>
+          <article class="organiser-card">
+            <h3>Krakow Story Slam</h3>
+            <p>True-story open mic nights with audience judging. Not strictly a comedy night, but comedians often perform.</p>
+            <div class="event-links">
+              <a class="event-link" href="https://www.facebook.com/share/g/1ASGjHJ5dx/" target="_blank" rel="noreferrer">Facebook</a>
+              <a class="event-link" href="https://www.instagram.com/krakowstoryslam" target="_blank" rel="noreferrer">Instagram</a>
+            </div>
+          </article>
+          <article class="organiser-card">
+            <h3>Krak Me Up Comedy</h3>
+            <p>English comedy showcases and open mic nights.</p>
+            <div class="event-links">
+              <a class="event-link" href="https://www.facebook.com/Krakmeupcomedy/" target="_blank" rel="noreferrer">Facebook</a>
+              <a class="event-link" href="https://www.instagram.com/krakmeupcomedy/" target="_blank" rel="noreferrer">Instagram</a>
+            </div>
+          </article>
+          <article class="organiser-card">
+            <h3>Not Gay At All</h3>
+            <p>English stand-up comedy open mic in Krakow.</p>
+            <div class="event-links">
+              <a class="event-link" href="https://www.facebook.com/events/1384701813675528/" target="_blank" rel="noreferrer">Facebook event</a>
+            </div>
+          </article>
+          <article class="organiser-card">
+            <h3>Luke and Stan</h3>
+            <p>English stand-up comedy events in Krakow.</p>
+          </article>
+          <article class="organiser-card">
+            <h3>Love/Lub Comedy</h3>
+            <p>Poznan-based English comedy organisers testing open mic events in Krakow.</p>
+          </article>
+        </div>
+      </section>
+
+      <main class="layout">
+        <section class="events-panel">
+          <h2>Upcoming Events</h2>
+          <div id="event-list" class="event-list"></div>
+          <noscript>
+            <p>Enable JavaScript to view the interactive event list and map.</p>
+          </noscript>
+        </section>
+
+        <section class="map-panel" aria-label="Map of English comedy venues in Krakow">
+          <div id="map"></div>
+        </section>
+      </main>
+
+      <section class="calendar-panel" aria-labelledby="calendar-heading">
+        <div class="calendar-header">
+          <h2 id="calendar-heading">Events Calendar</h2>
+          <div class="calendar-controls">
+            <button id="calendar-prev" type="button" aria-label="Previous month">‹</button>
+            <div id="calendar-month" class="calendar-month" aria-live="polite"></div>
+            <button id="calendar-next" type="button" aria-label="Next month">›</button>
+          </div>
+        </div>
+        <div class="calendar-weekdays" aria-hidden="true">
+          <span>Mon</span>
+          <span>Tue</span>
+          <span>Wed</span>
+          <span>Thu</span>
+          <span>Fri</span>
+          <span>Sat</span>
+          <span>Sun</span>
+        </div>
+        <div id="calendar-grid" class="calendar-grid"></div>
+      </section>
+    </div>
+
+    <script
+      src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+      integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+      crossorigin=""
+    ></script>
+    <script src="/app.js"></script>
+  </body>
+</html>

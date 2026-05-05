@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 620 360" role="img" aria-labelledby="title desc">
+  <title id="title">Dzien Tonic logo</title>
+  <desc id="desc">Yellow and green Dzien Tonic comedy logo with a microphone.</desc>
+  <rect width="620" height="360" fill="#fff"/>
+  <g stroke="#080808" stroke-linejoin="round" stroke-linecap="round">
+    <text x="54" y="150" fill="#ffe135" stroke-width="13" font-family="Arial Black, Impact, sans-serif" font-size="94" font-weight="900">DZIEŃ</text>
+    <text x="88" y="252" fill="#35b44b" stroke-width="13" font-family="Arial Black, Impact, sans-serif" font-size="88" font-weight="900">TONIC</text>
+    <text x="54" y="150" fill="#ffe135" stroke="none" font-family="Arial Black, Impact, sans-serif" font-size="94" font-weight="900">DZIEŃ</text>
+    <text x="88" y="252" fill="#35b44b" stroke="none" font-family="Arial Black, Impact, sans-serif" font-size="88" font-weight="900">TONIC</text>
+    <g transform="rotate(12 338 128)">
+      <rect x="303" y="69" width="54" height="137" rx="22" fill="#ffe135" stroke-width="10"/>
+      <circle cx="330" cy="63" r="35" fill="#080808" stroke-width="0"/>
+      <path d="M304 66c16 16 39 17 60 2" fill="none" stroke="#fff" stroke-width="7"/>
+      <path d="M321 99v57" fill="none" stroke="#080808" stroke-width="7"/>
+      <path d="M340 98v76" fill="none" stroke="#080808" stroke-width="7"/>
+    </g>
+    <circle cx="213" cy="225" r="34" fill="#ffe135" stroke-width="10"/>
+    <circle cx="200" cy="215" r="5" fill="#080808" stroke-width="0"/>
+    <circle cx="226" cy="215" r="5" fill="#080808" stroke-width="0"/>
+    <path d="M199 235c10 12 27 12 38 0" fill="none" stroke-width="6"/>
+    <path d="M158 290c108 20 226 19 344 1" fill="none" stroke="#ffe135" stroke-width="12"/>
+    <path d="M158 290c108 20 226 19 344 1" fill="none" stroke="#080808" stroke-width="4"/>
+  </g>
+  <path d="M385 33l12-22M413 52l28-10M401 78l24 16" fill="none" stroke="#080808" stroke-width="8" stroke-linecap="round"/>
+</svg>
