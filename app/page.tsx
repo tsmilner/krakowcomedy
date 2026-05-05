@@ -36,45 +36,45 @@ export default async function Home() {
   }));
 
   return (
-    <div id="top" className="space-y-12">
-      <section className="rounded-2xl border border-cyan-500/30 bg-zinc-900/60 p-5 text-base leading-relaxed text-zinc-100 ring-1 ring-cyan-500/10 sm:p-6">
+    <div id="top" className="space-y-8 sm:space-y-12">
+      <section className="rounded-2xl border-2 border-cyan-500/35 bg-zinc-900/60 p-4 text-base leading-relaxed text-zinc-100 ring-1 ring-cyan-500/10 sm:p-6">
         We are here to provide information about English language comedy events in Krakow. For full details,
         lineups, entry rules, and updates, always check each individual organiser event page directly.
       </section>
 
-      <section className="space-y-5">
+      <section className="space-y-4 sm:space-y-5">
         <div>
-          <h2 className="text-2xl font-semibold tracking-tight text-zinc-50">Upcoming in Krakow</h2>
+          <h2 className="text-xl font-semibold tracking-tight text-zinc-50 sm:text-2xl">Upcoming in Krakow</h2>
           <p className="mt-1 text-sm text-zinc-500">The next shows we know about.</p>
         </div>
-        <div className="grid gap-5 md:grid-cols-2">
+        <div className="grid gap-4 sm:gap-5 md:grid-cols-2">
           {upcoming.slice(0, 8).map((event) => (
             <EventCard key={event.id} event={event} />
           ))}
         </div>
       </section>
 
-      <section id="calendar" className="space-y-5">
+      <section id="calendar" className="space-y-4 sm:space-y-5">
         <div>
-          <h2 className="text-2xl font-semibold tracking-tight text-zinc-50">Calendar</h2>
+          <h2 className="text-xl font-semibold tracking-tight text-zinc-50 sm:text-2xl">Calendar</h2>
         </div>
         <CalendarClient events={calendarEvents} compact />
       </section>
 
-      <section className="space-y-5">
-        <h2 className="text-2xl font-semibold tracking-tight text-zinc-50">How to get involved</h2>
+      <section className="space-y-4 sm:space-y-5">
+        <h2 className="text-xl font-semibold tracking-tight text-zinc-50 sm:text-2xl">How to get involved</h2>
         <p className="text-zinc-400">
           Want to perform? Check the event links on Facebook first, then post in the event discussion/comments
           to ask for a spot. Most organisers use the event post as the main signup channel.
         </p>
       </section>
 
-      <section id="organisers" className="space-y-5">
+      <section id="organisers" className="space-y-4 sm:space-y-5">
         <div>
-          <h2 className="text-2xl font-semibold tracking-tight text-zinc-50">Organisers</h2>
+          <h2 className="text-xl font-semibold tracking-tight text-zinc-50 sm:text-2xl">Organisers</h2>
           <p className="mt-1 text-sm text-zinc-500">The people putting on nights in the city.</p>
         </div>
-        <div className="grid gap-5 md:grid-cols-2">
+        <div className="grid gap-4 sm:gap-5 md:grid-cols-2">
           {organisers.map((organiser) => {
             const isCozy = organiser.slug === "cozy-events";
             const isDzienTonic = organiser.slug === "dzien-tonic-story-slam";
@@ -86,7 +86,7 @@ export default async function Home() {
             return (
               <article
                 key={organiser.id}
-                className="rounded-2xl border border-violet-500/30 bg-zinc-900/70 p-6 shadow-[0_0_28px_-10px_rgba(124,58,237,0.4)] ring-1 ring-cyan-500/10 transition-[box-shadow,border-color] hover:border-fuchsia-400/40 hover:shadow-[0_0_36px_-8px_rgba(217,70,239,0.3)]"
+                className="rounded-2xl border-2 border-violet-500/35 bg-zinc-900/70 p-4 shadow-[0_0_28px_-10px_rgba(124,58,237,0.4)] ring-1 ring-cyan-500/10 transition-[box-shadow,border-color] hover:border-fuchsia-400/45 hover:shadow-[0_0_36px_-8px_rgba(217,70,239,0.3)] sm:p-6"
               >
               <h3 className="text-lg font-semibold tracking-tight text-zinc-50">
                 {organiser.slug === "cozy-events" ? "Cozy Events (Story Slam)" : organiser.name}
@@ -125,24 +125,24 @@ export default async function Home() {
         </div>
       </section>
 
-      <section id="map" className="space-y-5">
+      <section id="map" className="space-y-4 sm:space-y-5">
         <div>
-          <h2 className="text-2xl font-semibold tracking-tight text-zinc-50">Venue map</h2>
+          <h2 className="text-xl font-semibold tracking-tight text-zinc-50 sm:text-2xl">Venue map</h2>
           <p className="mt-1 text-sm text-zinc-500">Tap markers for upcoming nights at each spot.</p>
         </div>
         <MapClient venues={venues} />
       </section>
 
-      <section id="venues" className="space-y-5">
+      <section id="venues" className="space-y-4 sm:space-y-5">
         <div>
-          <h2 className="text-2xl font-semibold tracking-tight text-zinc-50">Venues</h2>
+          <h2 className="text-xl font-semibold tracking-tight text-zinc-50 sm:text-2xl">Venues</h2>
           <p className="mt-1 text-sm text-zinc-500">Where the shows happen.</p>
         </div>
-        <div className="grid gap-5 md:grid-cols-2">
+        <div className="grid gap-4 sm:gap-5 md:grid-cols-2">
           {venues.map((venue) => (
             <article
               key={venue.id}
-              className="rounded-2xl border border-violet-500/30 bg-zinc-900/70 p-6 shadow-[0_0_28px_-10px_rgba(124,58,237,0.4)] ring-1 ring-cyan-500/10 transition-[box-shadow,border-color] hover:border-fuchsia-400/40 hover:shadow-[0_0_36px_-8px_rgba(217,70,239,0.3)]"
+              className="rounded-2xl border-2 border-violet-500/35 bg-zinc-900/70 p-4 shadow-[0_0_28px_-10px_rgba(124,58,237,0.4)] ring-1 ring-cyan-500/10 transition-[box-shadow,border-color] hover:border-fuchsia-400/45 hover:shadow-[0_0_36px_-8px_rgba(217,70,239,0.3)] sm:p-6"
             >
               <h3 className="text-lg font-semibold tracking-tight text-zinc-50">{venue.name}</h3>
               <p className="mt-1.5 text-sm text-zinc-500">

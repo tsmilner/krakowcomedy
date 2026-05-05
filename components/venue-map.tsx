@@ -35,43 +35,43 @@ type VenueMapData = {
 
 export function VenueMap({ venues }: { venues: VenueMapData[] }) {
   return (
-    <div className="relative h-[460px] overflow-hidden rounded-2xl border border-violet-500/35 bg-zinc-900/80 shadow-[0_0_40px_-12px_rgba(124,58,237,0.45)] ring-1 ring-cyan-500/15">
+    <div className="relative h-[360px] overflow-hidden rounded-2xl border border-violet-500/35 bg-zinc-900/80 shadow-[0_0_40px_-12px_rgba(124,58,237,0.45)] ring-1 ring-cyan-500/15 sm:h-[460px]">
       <MapContainer center={[50.0614, 19.9366]} zoom={13} className="h-full w-full">
         <TileLayer attribution={CARTO_ATTRIBUTION} url={MAP_TILE_URL} />
         {venues.map((venue) => (
           <Marker key={venue.id} position={[venue.latitude, venue.longitude]}>
             <Popup>
-              <div className="space-y-2 text-sm text-zinc-200">
-                <h3 className="font-semibold text-white">{venue.name}</h3>
-                <p className="text-zinc-400">{venue.address}</p>
+              <div className="space-y-3 text-base text-white">
+                <h3 className="text-lg font-bold text-white">{venue.name}</h3>
+                <p className="text-sm text-slate-100">{venue.address}</p>
                 <a
                   href={googleMapsDirectionsUrl(venue.latitude, venue.longitude)}
                   target="_blank"
                   rel="noreferrer"
-                  className="inline-flex w-full items-center justify-center rounded-full bg-gradient-to-r from-violet-600 to-fuchsia-600 px-3 py-2 text-center text-xs font-semibold text-white shadow-[0_0_14px_-3px_rgba(168,85,247,0.55)] hover:from-violet-500 hover:to-fuchsia-500"
+                  className="popup-button inline-flex w-full items-center justify-center rounded-full border-2 border-blue-200/90 bg-blue-700 px-3.5 py-2.5 text-center text-base font-bold tracking-[0.01em] text-white shadow-sm hover:bg-blue-600"
                 >
                   Get directions
                 </a>
-                <p className="font-medium text-cyan-200">Upcoming:</p>
-                <ul className="list-disc pl-5 text-zinc-300">
+                <p className="text-base font-bold text-white">Upcoming:</p>
+                <ul className="list-disc pl-5 text-slate-100">
                   {venue.events.slice(0, 3).map((event) => (
                     <li key={event.id}>
                       <Link
                         href={`/events/${event.slug}`}
-                        className="font-medium text-cyan-200 underline decoration-fuchsia-500/40 underline-offset-2 hover:text-fuchsia-200"
+                        className="font-semibold text-blue-100 underline decoration-blue-200/60 underline-offset-2 hover:text-white"
                       >
                         {event.title}
                       </Link>
                     </li>
                   ))}
                 </ul>
-                <div className="flex flex-wrap gap-2">
+                <div className="flex flex-wrap gap-3 text-sm">
                   {venue.websiteUrl && (
                     <a
                       href={venue.websiteUrl}
                       target="_blank"
                       rel="noreferrer"
-                      className="text-cyan-200 underline decoration-violet-500/40"
+                      className="font-semibold text-blue-100 underline decoration-blue-200/60"
                     >
                       Website
                     </a>
@@ -81,7 +81,7 @@ export function VenueMap({ venues }: { venues: VenueMapData[] }) {
                       href={venue.instagramUrl}
                       target="_blank"
                       rel="noreferrer"
-                      className="text-cyan-200 underline decoration-violet-500/40"
+                      className="font-semibold text-blue-100 underline decoration-blue-200/60"
                     >
                       Instagram
                     </a>
@@ -91,7 +91,7 @@ export function VenueMap({ venues }: { venues: VenueMapData[] }) {
                       href={venue.facebookUrl}
                       target="_blank"
                       rel="noreferrer"
-                      className="text-cyan-200 underline decoration-violet-500/40"
+                      className="font-semibold text-blue-100 underline decoration-blue-200/60"
                     >
                       Facebook
                     </a>

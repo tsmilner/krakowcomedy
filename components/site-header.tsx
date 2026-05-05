@@ -20,18 +20,18 @@ export function SiteHeader() {
             src="/krakow-comedy-logo.png"
             alt=""
             aria-hidden
-            width={840}
-            height={840}
-            className="h-60 w-60 max-w-[min(90vw,34rem)] object-contain sm:h-[19rem] sm:w-[19rem] md:h-[21rem] md:w-[21rem]"
+            width={1200}
+            height={1200}
+            className="h-72 w-72 max-w-[min(95vw,42rem)] object-contain sm:h-[24rem] sm:w-[24rem] md:h-[28rem] md:w-[28rem]"
             priority
           />
         </Link>
-        <nav className="flex w-full max-w-2xl flex-wrap items-center justify-center gap-2 border-t border-violet-500/20 pt-4 text-base">
+        <nav className="flex w-full max-w-2xl flex-nowrap items-center justify-center gap-1 sm:gap-2 border-t border-violet-500/20 pt-4 text-[0.92rem] sm:text-lg">
           {links.map((link) => (
             <Link
               key={link.href}
               href={link.href}
-              className="rounded-full border border-violet-500/30 bg-zinc-900/70 px-4 py-2 font-semibold tracking-[0.01em] text-cyan-100 transition-all hover:-translate-y-0.5 hover:border-cyan-400/45 hover:bg-violet-950/80 hover:text-white hover:shadow-[0_0_16px_-3px_rgba(34,211,238,0.4)]"
+              className="rounded-full border border-violet-500/30 bg-zinc-900/70 px-2 py-1 sm:px-3.5 sm:py-2 font-semibold tracking-[0.01em] text-cyan-100 transition-all hover:-translate-y-0.5 hover:border-cyan-400/45 hover:bg-violet-950/80 hover:text-white hover:shadow-[0_0_16px_-3px_rgba(34,211,238,0.4)]"
             >
               {link.label}
             </Link>

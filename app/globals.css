@@ -127,27 +127,41 @@ main li {
 
 /* Leaflet — dark popups to match neon UI */
 .leaflet-popup-content-wrapper {
-  background: #18181b !important;
-  color: #e4e4e7 !important;
-  border: 1px solid rgba(139, 92, 246, 0.45) !important;
+  background: #0f172a !important;
+  color: #ffffff !important;
+  border: 2px solid rgba(96, 165, 250, 0.75) !important;
   border-radius: 0.75rem !important;
-  box-shadow: 0 0 28px -6px rgba(124, 58, 237, 0.45), 0 0 16px -4px rgba(34, 211, 238, 0.15) !important;
+  box-shadow: 0 8px 24px -8px rgba(15, 23, 42, 0.9) !important;
 }
 
 .leaflet-popup-tip {
-  background: #18181b !important;
-  border: 1px solid rgba(139, 92, 246, 0.45) !important;
+  background: #0f172a !important;
+  border: 2px solid rgba(96, 165, 250, 0.75) !important;
 }
 
 .leaflet-popup-content {
-  margin: 0.75rem 0.85rem !important;
-  min-width: 10rem;
+  margin: 0.9rem 1rem !important;
+  min-width: 12rem;
 }
 
 .leaflet-popup-content a {
-  color: #67e8f9;
+  color: #e0f2fe;
 }
 
 .leaflet-popup-content a:hover {
-  color: #f0abfc;
+  color: #ffffff;
+}
+
+.leaflet-popup-content a:not(.popup-button) {
+  color: #e0f2fe !important;
+  text-decoration-color: rgba(147, 197, 253, 0.85);
+}
+
+.leaflet-popup-content a:not(.popup-button):hover {
+  color: #ffffff !important;
+}
+
+.leaflet-popup-content a.popup-button,
+.leaflet-popup-content a.popup-button:hover {
+  color: #ffffff !important;
 }
