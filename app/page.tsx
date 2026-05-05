@@ -57,6 +57,14 @@ export default async function Home() {
       <section id="calendar" className="space-y-4 sm:space-y-5">
         <div>
           <h2 className="text-xl font-semibold tracking-tight text-zinc-50 sm:text-2xl">Calendar</h2>
+          <div className="mt-3">
+            <a
+              href="/api/calendar/all"
+              className="inline-flex items-center rounded-full border border-violet-400/50 bg-violet-900/60 px-4 py-2 text-sm font-semibold text-violet-100 shadow-[0_0_14px_-4px_rgba(168,85,247,0.5)] transition-colors hover:bg-violet-800/70 hover:text-white"
+            >
+              Add all events to my Google Calendar
+            </a>
+          </div>
         </div>
         <CalendarClient events={calendarEvents} compact />
       </section>
