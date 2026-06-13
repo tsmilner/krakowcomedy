@@ -52,7 +52,7 @@ export function CalendarClient({ events, compact = false }: CalendarClientProps)
         expandRows
         dayMaxEventRows={false}
         eventMinHeight={compact ? 14 : 18}
-        contentHeight={compact ? 320 : 370}
+        contentHeight={compact ? 500 : 560}
         height="auto"
       />
     </div>

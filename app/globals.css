@@ -118,28 +118,15 @@ main li {
 }
 
 .fc .fc-daygrid-body .fc-scrollgrid-sync-table > tbody > tr {
-  height: 2.625rem;
+  height: 5rem;
 }
 
 .fc .fc-daygrid-day-frame {
-  height: 2.625rem;
-  min-height: 2.625rem;
-  max-height: 2.625rem;
+  min-height: 5rem;
   margin: 0.1rem;
   border-radius: 0.6rem;
   background: linear-gradient(180deg, rgba(24, 24, 27, 0.64), rgba(9, 9, 11, 0.34));
-  overflow-y: auto;
-  scrollbar-width: thin;
-  scrollbar-color: rgba(167, 139, 250, 0.45) transparent;
-}
-
-.fc .fc-daygrid-day-frame::-webkit-scrollbar {
-  width: 0.28rem;
-}
-
-.fc .fc-daygrid-day-frame::-webkit-scrollbar-thumb {
-  border-radius: 9999px;
-  background: rgba(167, 139, 250, 0.45);
+  overflow: visible;
 }
 
 .fc .fc-daygrid-day-events {
