@@ -3,7 +3,8 @@ import Link from "next/link";
 
 const links = [
   { href: "/#calendar", label: "Calendar" },
-  { href: "/#organisers", label: "Organisers" },
+  { href: "/organisers", label: "Organisers" },
+  { href: "/touring-comics", label: "Touring Comics" },
   { href: "/#map", label: "Map" },
   { href: "/#venues", label: "Venues" },
 ];
@@ -26,7 +27,7 @@ export function SiteHeader() {
             priority
           />
         </Link>
-        <nav className="mx-auto flex w-full flex-nowrap items-center justify-center gap-1 border-t border-violet-500/20 pt-4 text-[0.92rem] sm:gap-2 sm:text-lg">
+        <nav className="mx-auto flex w-full flex-wrap items-center justify-center gap-1 border-t border-violet-500/20 pt-4 text-[0.92rem] sm:gap-2 sm:text-lg">
           {links.map((link) => (
             <Link
               key={link.href}

@@ -1,15 +1,32 @@
 import { EventLanguage, EventType, Prisma } from "@prisma/client";
-import { addDays, endOfDay, startOfDay } from "date-fns";
+import { addDays } from "date-fns";
 import { prisma } from "./prisma";
+import { EVENT_TIMEZONE, parseKrakowDatetimeLocal } from "./utils";
 
 /** Matches default home/calendar listings (see buildEventWhere). */
 export const UPCOMING_LISTING_DAYS = 120;
 
+function dateInputValueInKrakow(date: Date) {
+  const parts = new Intl.DateTimeFormat("en-CA", {
+    timeZone: EVENT_TIMEZONE,
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+  }).formatToParts(date);
+  const get = (type: Intl.DateTimeFormatPartTypes) =>
+    parts.find((part) => part.type === type)?.value ?? "";
+
+  return `${get("year")}-${get("month")}-${get("day")}`;
+}
+
 export function defaultUpcomingStartEnd() {
   const now = new Date();
+  const startDate = dateInputValueInKrakow(now);
+  const endDate = dateInputValueInKrakow(addDays(now, UPCOMING_LISTING_DAYS));
+
   return {
-    start: startOfDay(now),
-    end: endOfDay(addDays(now, UPCOMING_LISTING_DAYS)),
+    start: parseKrakowDatetimeLocal(`${startDate}T00:00`),
+    end: parseKrakowDatetimeLocal(`${endDate}T23:59`),
   };
 }
 
@@ -26,8 +43,12 @@ export function buildEventWhere(filters: EventFilters): Prisma.EventWhereInput {
   const defaultRange = defaultUpcomingStartEnd();
   const where: Prisma.EventWhereInput = {
     startDateTime: {
-      gte: filters.from ? startOfDay(new Date(filters.from)) : defaultRange.start,
-      lte: filters.to ? endOfDay(new Date(filters.to)) : defaultRange.end,
+      gte: filters.from
+        ? parseKrakowDatetimeLocal(`${filters.from}T00:00`)
+        : defaultRange.start,
+      lte: filters.to
+        ? parseKrakowDatetimeLocal(`${filters.to}T23:59`)
+        : defaultRange.end,
     },
   };
 

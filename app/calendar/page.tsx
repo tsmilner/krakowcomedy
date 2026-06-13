@@ -4,6 +4,7 @@ import { CalendarClient } from "@/components/calendar-client";
 import { EventCard } from "@/components/event-card";
 import { getEvents, getVenuesWithUpcomingListings } from "@/lib/data";
 import { prisma } from "@/lib/prisma";
+import { toKrakowDatetimeLocalValue } from "@/lib/utils";
 
 type CalendarPageProps = {
   searchParams: Promise<{
@@ -41,8 +42,8 @@ export default async function CalendarPage({ searchParams }: CalendarPageProps) 
   const calendarEvents = events.map((event) => ({
     id: String(event.id),
     title: event.title,
-    start: event.startDateTime.toISOString(),
-    end: event.endDateTime ? event.endDateTime.toISOString() : undefined,
+    start: toKrakowDatetimeLocalValue(event.startDateTime),
+    end: event.endDateTime ? toKrakowDatetimeLocalValue(event.endDateTime) : undefined,
     url: `/events/${event.slug}`,
   }));
 

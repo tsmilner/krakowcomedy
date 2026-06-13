@@ -2,16 +2,12 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import { requireAdmin } from "@/lib/admin-auth";
 import { prisma } from "@/lib/prisma";
+import { toKrakowDatetimeLocalValue } from "@/lib/utils";
 import { updateEventAction } from "../../actions";
 
 type EditEventProps = {
   params: Promise<{ id: string }>;
 };
-
-function toLocalInputValue(date: Date) {
-  const local = new Date(date.getTime() - date.getTimezoneOffset() * 60000);
-  return local.toISOString().slice(0, 16);
-}
 
 export default async function EditEventPage({ params }: EditEventProps) {
   await requireAdmin();
@@ -40,14 +36,14 @@ export default async function EditEventPage({ params }: EditEventProps) {
         <input
           name="startDateTime"
           type="datetime-local"
-          defaultValue={toLocalInputValue(event.startDateTime)}
+          defaultValue={toKrakowDatetimeLocalValue(event.startDateTime)}
           required
           className="rounded border border-zinc-300 px-3 py-2 text-sm"
         />
         <input
           name="endDateTime"
           type="datetime-local"
-          defaultValue={event.endDateTime ? toLocalInputValue(event.endDateTime) : ""}
+          defaultValue={event.endDateTime ? toKrakowDatetimeLocalValue(event.endDateTime) : ""}
           className="rounded border border-zinc-300 px-3 py-2 text-sm"
         />
         <select name="eventType" defaultValue={event.eventType} className="rounded border border-zinc-300 px-3 py-2 text-sm">

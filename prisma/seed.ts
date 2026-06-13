@@ -73,6 +73,39 @@ async function main() {
           "Poznan-based one-off open mic organiser appearing in Krakow listings.",
       },
     }),
+    prisma.organiser.create({
+      data: {
+        name: "Hot Chocolate Comedy",
+        slug: "hot-chocolate-comedy",
+        description: "English-language comedy open mic hosted by Tony (Anthony Robinson).",
+      },
+    }),
+    prisma.organiser.create({
+      data: {
+        name: "Omnibus Musical Improv",
+        slug: "omnibus-musical-improv",
+        description:
+          "English-language musical improv comedy group creating fully improvised shows in Krakow.",
+        facebookUrl: "https://www.facebook.com/omnibus.musical.improv",
+        instagramUrl: "https://www.instagram.com/omnibus_improv/",
+      },
+    }),
+    prisma.organiser.create({
+      data: {
+        name: "Miguel Aliaga",
+        slug: "miguel-aliaga",
+        description: "International English-language stand-up comedian and producer.",
+        instagramUrl: "https://www.instagram.com/miguelaliagacomedy/",
+      },
+    }),
+    prisma.organiser.create({
+      data: {
+        name: "Victor Patrascan",
+        slug: "victor-patrascan",
+        description: "Touring English-language stand-up comedian and social commentator.",
+        websiteUrl: "https://victorpatrascan.com/",
+      },
+    }),
   ]);
 
   await Promise.all([
@@ -120,6 +153,54 @@ async function main() {
         description: "Basement room used for stand-up and open mic events.",
       },
     }),
+    prisma.venue.create({
+      data: {
+        name: "Layla Lounge Bar",
+        slug: "layla-lounge-bar",
+        address: "Józefa Dietla 91, 31-031 Kraków",
+        latitude: 50.0563895,
+        longitude: 19.9458846,
+        area: "Kazimierz",
+        description: "Lebanese lounge bar hosting international community and comedy events.",
+        facebookUrl: "https://www.facebook.com/LaylaLoungeBar/",
+        instagramUrl: "https://www.instagram.com/layla_lounge_bar/",
+      },
+    }),
+    prisma.venue.create({
+      data: {
+        name: "Pub 103,8 FM",
+        slug: "pub-103-8-fm",
+        address: "Bożego Ciała 7, 31-059 Kraków",
+        latitude: 50.0511,
+        longitude: 19.9447,
+        area: "Kazimierz",
+        description: "Comedy pub and live performance venue in Kazimierz.",
+        websiteUrl: "https://www.kupbilecik.pl/obiekty/6949/Pub%2B103%2C8%2BFM/",
+        instagramUrl: "https://www.instagram.com/103.8fm_pub/",
+      },
+    }),
+    prisma.venue.create({
+      data: {
+        name: "Forum Horyzonty",
+        slug: "forum-horyzonty",
+        address: "Marii Konopnickiej 28, 30-302 Kraków",
+        latitude: 50.0478,
+        longitude: 19.9322,
+        area: "Ludwinów",
+        description: "Event space at Forum used for touring comedy shows.",
+      },
+    }),
+    prisma.venue.create({
+      data: {
+        name: "Świętego Tomasza 31",
+        slug: "swietego-tomasza-31",
+        address: "Świętego Tomasza 31, 31-027 Kraków",
+        latitude: 50.0621481,
+        longitude: 19.9419453,
+        area: "Old Town",
+        description: "Central Krakow venue hosting live performance and improv events.",
+      },
+    }),
   ]);
 
   await Promise.all([
@@ -151,6 +232,24 @@ async function main() {
     }),
     prisma.event.create({
       data: {
+        title: "Krakow Story Slam: Don't Tell My Mother!",
+        slug: "krakow-story-slam-dont-tell-my-mother-2026-06-12",
+        description:
+          "English-language true-story open mic with seven-minute stories inspired by the theme Don't Tell My Mother!",
+        startDateTime: new Date("2026-06-12T19:00:00+02:00"),
+        endDateTime: new Date("2026-06-12T21:00:00+02:00"),
+        eventType: EventType.STORY_SLAM,
+        language: EventLanguage.ENGLISH,
+        instagramUrl: "https://www.instagram.com/reel/DZD9-z4ioDA/",
+        websiteUrl: "https://www.instagram.com/krakowstoryslam/",
+        externalSourceName: "Krakow Story Slam Instagram",
+        isRecurring: true,
+        venue: { connect: { slug: "the-atrium-hotel" } },
+        organiser: { connect: { slug: "cozy-events" } },
+      },
+    }),
+    prisma.event.create({
+      data: {
         title: "Not Gay At All Open Mic",
         slug: "not-gay-at-all-open-mic-2026-05-20",
         description: "English stand-up open mic by Luke Dwornik-Longacre and Stanislav Kelberg.",
@@ -158,6 +257,41 @@ async function main() {
         eventType: EventType.OPEN_MIC,
         language: EventLanguage.ENGLISH,
         facebookEventUrl: "https://www.facebook.com/events/1384701813675528/",
+        venue: { connect: { slug: "chicago-jazz" } },
+        organiser: { connect: { slug: "not-gay-at-all-comedy" } },
+      },
+    }),
+    prisma.event.create({
+      data: {
+        title: "Lub Me Up, Krak Me Down",
+        slug: "lub-me-up-krak-me-down-2026-06-10",
+        description:
+          "English stand-up comedy night with YuYu and friends, co-hosted by Luke Dwornik-Longacre and Stan Kelberg.",
+        startDateTime: new Date("2026-06-10T20:00:00+02:00"),
+        endDateTime: new Date("2026-06-10T22:00:00+02:00"),
+        eventType: EventType.SHOWCASE,
+        language: EventLanguage.ENGLISH,
+        facebookEventUrl: "https://www.facebook.com/events/1361779456000844/",
+        instagramUrl: "https://www.instagram.com/p/DYqMDfBNrBn/",
+        externalSourceName: "Facebook / Instagram",
+        sourceNotes: "Co-hosted by Luke Dwornik-Longacre and Stan Kelberg.",
+        venue: { connect: { slug: "chicago-jazz" } },
+        organiser: { connect: { slug: "not-gay-at-all-comedy" } },
+      },
+    }),
+    prisma.event.create({
+      data: {
+        title: "English Stand-Up Comedy Competition",
+        slug: "english-stand-up-comedy-competition-2026-06-12",
+        description:
+          "English stand-up comedy competition hosted by Luke Dwornik-Longacre and Stan Kelberg.",
+        startDateTime: new Date("2026-06-12T20:00:00+02:00"),
+        endDateTime: new Date("2026-06-12T22:00:00+02:00"),
+        eventType: EventType.SHOWCASE,
+        language: EventLanguage.ENGLISH,
+        instagramUrl: "https://www.instagram.com/p/DY94a8ZNMlA/",
+        externalSourceName: "Instagram",
+        sourceNotes: "Seating from 19:30; hosted by Luke Dwornik-Longacre and Stan Kelberg.",
         venue: { connect: { slug: "chicago-jazz" } },
         organiser: { connect: { slug: "not-gay-at-all-comedy" } },
       },
@@ -186,6 +320,74 @@ async function main() {
         facebookEventUrl: "https://www.facebook.com/events/854334386973245",
         venue: { connect: { slug: "bracka-4-poziom-1" } },
         organiser: { connect: { slug: "love-lub-comedy" } },
+      },
+    }),
+    prisma.event.create({
+      data: {
+        title: "The Hot Chocolate Comedy Show",
+        slug: "the-hot-chocolate-comedy-show-2026-06-18",
+        description: "English comedy open mic hosted by Tony (Anthony Robinson).",
+        startDateTime: new Date("2026-06-18T21:00:00+02:00"),
+        endDateTime: new Date("2026-06-18T23:00:00+02:00"),
+        eventType: EventType.OPEN_MIC,
+        language: EventLanguage.ENGLISH,
+        facebookEventUrl: "https://www.facebook.com/events/1293415799616803/",
+        websiteUrl: "https://www.facebook.com/events/1293415799616803/",
+        externalSourceName: "Facebook",
+        sourceNotes:
+          "Facebook confirms the date, venue, and host; 21:00 start follows the established time of previous editions.",
+        isRecurring: true,
+        venue: { connect: { slug: "layla-lounge-bar" } },
+        organiser: { connect: { slug: "hot-chocolate-comedy" } },
+      },
+    }),
+    prisma.event.create({
+      data: {
+        title: "Omnibus Musical Improv Comedy Show",
+        slug: "omnibus-musical-improv-comedy-show-2026-06-11",
+        description:
+          "English-language musical improv comedy show created live from audience suggestions.",
+        startDateTime: new Date("2026-06-11T20:00:00+02:00"),
+        endDateTime: new Date("2026-06-11T22:00:00+02:00"),
+        eventType: EventType.IMPROV,
+        language: EventLanguage.ENGLISH,
+        facebookEventUrl: "https://www.facebook.com/omnibus.musical.improv",
+        instagramUrl: "https://www.instagram.com/omnibus_improv/",
+        externalSourceName: "Facebook",
+        venue: { connect: { slug: "swietego-tomasza-31" } },
+        organiser: { connect: { slug: "omnibus-musical-improv" } },
+      },
+    }),
+    prisma.event.create({
+      data: {
+        title: "Make Immigrants Great Again",
+        slug: "make-immigrants-great-again-2026-06-28",
+        description: "English stand-up comedy show by Miguel Aliaga.",
+        startDateTime: new Date("2026-06-28T20:30:00+02:00"),
+        endDateTime: new Date("2026-06-28T22:30:00+02:00"),
+        eventType: EventType.STAND_UP,
+        language: EventLanguage.ENGLISH,
+        ticketUrl: "https://www.eventbrite.com/d/poland--krak%C3%B3w/comedy/",
+        websiteUrl: "https://www.eventbrite.com/d/poland--krak%C3%B3w/comedy/",
+        externalSourceName: "Eventbrite",
+        venue: { connect: { slug: "pub-103-8-fm" } },
+        organiser: { connect: { slug: "miguel-aliaga" } },
+      },
+    }),
+    prisma.event.create({
+      data: {
+        title: "Stand-Up Comedy in Broken English: Victor Patrascan",
+        slug: "stand-up-comedy-in-broken-english-victor-patrascan-2026-09-14",
+        description: "English stand-up comedy by touring comedian Victor Patrascan.",
+        startDateTime: new Date("2026-09-14T20:00:00+02:00"),
+        endDateTime: new Date("2026-09-14T22:00:00+02:00"),
+        eventType: EventType.STAND_UP,
+        language: EventLanguage.ENGLISH,
+        ticketUrl: "https://fienta.com/stand-up-comedy-in-broken-english-victor-patrascan-in-krakow",
+        websiteUrl: "https://fienta.com/stand-up-comedy-in-broken-english-victor-patrascan-in-krakow",
+        externalSourceName: "Fienta",
+        venue: { connect: { slug: "forum-horyzonty" } },
+        organiser: { connect: { slug: "victor-patrascan" } },
       },
     }),
   ]);

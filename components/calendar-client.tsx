@@ -19,6 +19,8 @@ export function CalendarClient({ events, compact = false }: CalendarClientProps)
     >
       <FullCalendar
         plugins={[dayGridPlugin, interactionPlugin]}
+        timeZone="UTC"
+        firstDay={1}
         initialView="dayGridMonth"
         headerToolbar={{
           left: compact ? "prev,next" : "prev,next today",
@@ -29,15 +31,28 @@ export function CalendarClient({ events, compact = false }: CalendarClientProps)
           today: "Today",
           month: compact ? "Month" : "Month",
         }}
+        eventTimeFormat={{
+          hour: "2-digit",
+          minute: "2-digit",
+          hour12: false,
+        }}
+        eventContent={(info) => (
+          <div className="calendar-event-content">
+            {info.timeText && <span className="calendar-event-time">{info.timeText}</span>}
+            <span className="calendar-event-title">{info.event.title}</span>
+          </div>
+        )}
         events={events}
         eventClick={(info) => {
           info.jsEvent.preventDefault();
           if (info.event.url) router.push(info.event.url);
         }}
         fixedWeekCount={false}
-        dayMaxEventRows={compact ? 2 : 3}
+        showNonCurrentDates={false}
+        expandRows
+        dayMaxEventRows={false}
         eventMinHeight={compact ? 14 : 18}
-        contentHeight={compact ? 440 : "auto"}
+        contentHeight={compact ? 320 : 370}
         height="auto"
       />
     </div>

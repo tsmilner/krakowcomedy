@@ -6,7 +6,9 @@ import { ExternalLinks } from "@/components/external-links";
 import { MapClient } from "@/components/map-client";
 import { getEvents, getVenueWithEvents } from "@/lib/data";
 import { prisma } from "@/lib/prisma";
-import { formatEventDate } from "@/lib/utils";
+import { formatEventDate, toKrakowDatetimeLocalValue } from "@/lib/utils";
+
+const NON_LOCAL_ORGANISER_SLUGS = ["love-lub-comedy", "miguel-aliaga", "victor-patrascan"];
 
 export const metadata: Metadata = {
   alternates: { canonical: "/" },
@@ -28,12 +30,14 @@ export default async function Home() {
     }),
     getVenueWithEvents(),
     prisma.organiser.findMany({
-      where: { slug: { not: "love-lub-comedy" } },
+      where: { slug: { notIn: NON_LOCAL_ORGANISER_SLUGS } },
       include: {
         events: {
-          where: { startDateTime: { gte: new Date() } },
+          where: {
+            startDateTime: { gte: new Date() },
+            language: "ENGLISH",
+          },
           orderBy: { startDateTime: "asc" },
-          
         },
       },
       orderBy: { name: "asc" },
@@ -43,8 +47,8 @@ export default async function Home() {
   const calendarEvents = upcoming.map((event) => ({
     id: String(event.id),
     title: event.title,
-    start: event.startDateTime.toISOString(),
-    end: event.endDateTime ? event.endDateTime.toISOString() : undefined,
+    start: toKrakowDatetimeLocalValue(event.startDateTime),
+    end: event.endDateTime ? toKrakowDatetimeLocalValue(event.endDateTime) : undefined,
     url: `/events/${event.slug}`,
   }));
   const organisers = [...organisersRaw].sort((a, b) => {
@@ -94,8 +98,12 @@ export default async function Home() {
 
       <section id="organisers" className="space-y-4 sm:space-y-5">
         <div>
-          <h2 className="text-xl font-semibold tracking-tight text-zinc-50 sm:text-2xl">Organisers</h2>
-          <p className="mt-1 text-sm text-zinc-500">The people putting on nights in the city.</p>
+          <h2 className="text-xl font-semibold tracking-tight text-zinc-50 sm:text-2xl">
+            Kraków organisers
+          </h2>
+          <p className="mt-1 text-sm text-zinc-500">
+            Local groups and hosts regularly putting on English-language nights in the city.
+          </p>
         </div>
         <div className="grid gap-4 sm:gap-5 md:grid-cols-2">
           {organisers.map((organiser) => {
@@ -157,6 +165,12 @@ export default async function Home() {
             );
           })}
         </div>
+        <Link
+          href="/touring-comics"
+          className="inline-flex rounded-full border border-cyan-500/35 bg-zinc-900/70 px-4 py-2 text-sm font-semibold text-cyan-100 transition-colors hover:border-fuchsia-400/50 hover:text-white"
+        >
+          See touring comics performing in English
+        </Link>
       </section>
 
       <section id="map" className="space-y-4 sm:space-y-5">

@@ -5,7 +5,7 @@ import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { loginWithPassword, logoutAdmin } from "@/lib/admin-auth";
 import { prisma } from "@/lib/prisma";
-import { slugify } from "@/lib/utils";
+import { parseKrakowDatetimeLocal, slugify } from "@/lib/utils";
 
 function asOptional(value: FormDataEntryValue | null) {
   if (!value) return null;
@@ -116,9 +116,9 @@ export async function createEventAction(data: FormData) {
       title,
       slug: slugify(title),
       description: getRequiredString(data, "description"),
-      startDateTime: new Date(getRequiredString(data, "startDateTime")),
+      startDateTime: parseKrakowDatetimeLocal(getRequiredString(data, "startDateTime")),
       endDateTime: asOptional(data.get("endDateTime"))
-        ? new Date(String(data.get("endDateTime")))
+        ? parseKrakowDatetimeLocal(String(data.get("endDateTime")))
         : null,
       eventType: getRequiredString(data, "eventType") as EventType,
       language: getRequiredString(data, "language") as EventLanguage,
@@ -150,9 +150,9 @@ export async function updateEventAction(id: number, data: FormData) {
       title,
       slug: slugify(title),
       description: getRequiredString(data, "description"),
-      startDateTime: new Date(getRequiredString(data, "startDateTime")),
+      startDateTime: parseKrakowDatetimeLocal(getRequiredString(data, "startDateTime")),
       endDateTime: asOptional(data.get("endDateTime"))
-        ? new Date(String(data.get("endDateTime")))
+        ? parseKrakowDatetimeLocal(String(data.get("endDateTime")))
         : null,
       eventType: getRequiredString(data, "eventType") as EventType,
       language: getRequiredString(data, "language") as EventLanguage,
