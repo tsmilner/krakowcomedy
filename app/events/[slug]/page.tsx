@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { ExternalLinks } from "@/components/external-links";
 import { SeoJsonLd } from "@/components/seo-json-ld";
+import { editorialNote, getEventLocalContext, getOrganiserDescription, getVenueDescription } from "@/lib/editorial";
 import { prisma } from "@/lib/prisma";
 import { getSiteUrl } from "@/lib/site";
 import {
@@ -30,7 +31,7 @@ export async function generateMetadata({ params }: EventDetailProps) {
 
   return {
     title: `${event.title} | Krakow Comedy Calendar`,
-    description: `${event.title} at ${event.venue.name}, Krakow.`,
+    description: `${event.title} at ${event.venue.name}, Krakow. Curated local listing with venue context, organiser link, and a reminder to verify details before attending.`,
   };
 }
 
@@ -144,7 +145,32 @@ export default async function EventDetailPage({ params }: EventDetailProps) {
         </div>
       </div>
 
-      <p className="max-w-3xl text-base leading-relaxed text-zinc-400">{event.description}</p>
+      <section className="space-y-3">
+        <h2 className="text-xl font-semibold tracking-tight text-zinc-50">About this listing</h2>
+        <p className="max-w-3xl text-base leading-relaxed text-zinc-300">
+          {getEventLocalContext(event)}
+        </p>
+        <p className="max-w-3xl text-base leading-relaxed text-zinc-400">{event.description}</p>
+      </section>
+
+      <section className="grid gap-4 md:grid-cols-2">
+        <div className="rounded-2xl border border-zinc-700/70 bg-zinc-950/40 p-5">
+          <h2 className="text-lg font-semibold text-zinc-50">Venue context</h2>
+          <p className="mt-2 text-sm leading-6 text-zinc-400">{getVenueDescription(event.venue)}</p>
+        </div>
+        <div className="rounded-2xl border border-zinc-700/70 bg-zinc-950/40 p-5">
+          <h2 className="text-lg font-semibold text-zinc-50">Organiser context</h2>
+          <p className="mt-2 text-sm leading-6 text-zinc-400">
+            {getOrganiserDescription(event.organiser)}
+          </p>
+        </div>
+      </section>
+
+      <aside className="rounded-2xl border border-cyan-500/25 bg-zinc-950/50 p-5 text-sm leading-6 text-cyan-100">
+        <strong className="text-zinc-50">Before you go:</strong> event times, lineups, ticket availability,
+        door rules, and performer signup instructions can change. Always check the organiser&apos;s official
+        event link before travelling or buying tickets. {editorialNote}
+      </aside>
 
       {event.tags.length > 0 && (
         <div className="flex flex-wrap gap-2 border-t border-zinc-700/60 pt-6">

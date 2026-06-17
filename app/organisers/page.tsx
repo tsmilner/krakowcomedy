@@ -1,14 +1,15 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ExternalLinks } from "@/components/external-links";
+import { getOrganiserDescription } from "@/lib/editorial";
 import { prisma } from "@/lib/prisma";
 
 const NON_LOCAL_ORGANISER_SLUGS = ["love-lub-comedy", "miguel-aliaga", "victor-patrascan"];
 
 export const metadata: Metadata = {
-  title: "Organisers",
+  title: "Krakow Comedy Organisers",
   description:
-    "Regular English-language comedy organisers in Krakow and touring comics with upcoming English shows.",
+    "Human-curated notes on Krakow organisers running English-language stand-up, open mics, improv, story slams and touring comedy shows.",
   alternates: { canonical: "/organisers" },
 };
 
@@ -59,7 +60,9 @@ export default async function OrganisersPage() {
         <h3 className="text-xl font-semibold text-zinc-50">
           {isCozy ? "Cozy Events (Story Slam)" : organiser.name}
         </h3>
-        <p className="mt-3 text-sm leading-6 text-zinc-400">{organiser.description}</p>
+        <p className="mt-3 text-sm leading-6 text-zinc-400">
+          {getOrganiserDescription(organiser)}
+        </p>
         <div className="mt-4">
           <ExternalLinks
             websiteUrl={websiteUrl}
@@ -88,7 +91,10 @@ export default async function OrganisersPage() {
               ))}
             </ul>
           ) : (
-            <p className="text-sm text-zinc-500">No upcoming events currently listed.</p>
+            <p className="text-sm text-zinc-500">
+              No upcoming English-language events are currently listed here. Check the organiser&apos;s own
+              links for the latest posts.
+            </p>
           )}
         </div>
       </article>
@@ -103,7 +109,9 @@ export default async function OrganisersPage() {
             Regular comedy organisers
           </h1>
           <p className="mt-2 max-w-3xl text-sm leading-6 text-zinc-400">
-            Krakow-based groups and hosts running recurring English-language comedy nights.
+            These are Krakow-based groups and hosts that appear in the guide because they run, host, or
+            support English-language comedy nights. The notes are written to help readers understand the
+            format of each organiser&apos;s events before clicking through to social pages.
           </p>
         </div>
         <div className="grid gap-4 md:grid-cols-2">

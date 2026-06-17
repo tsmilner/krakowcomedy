@@ -5,6 +5,7 @@ import { EventCard } from "@/components/event-card";
 import { ExternalLinks } from "@/components/external-links";
 import { MapClient } from "@/components/map-client";
 import { getEvents, getVenueWithEvents } from "@/lib/data";
+import { editorialNote, getOrganiserDescription, getVenueDescription } from "@/lib/editorial";
 import { prisma } from "@/lib/prisma";
 import { formatEventDate, toKrakowDatetimeLocalValue } from "@/lib/utils";
 
@@ -64,15 +65,57 @@ export default async function Home() {
       <h1 className="bg-gradient-to-r from-white via-violet-100 to-cyan-200 bg-clip-text text-center text-2xl font-semibold tracking-tight text-transparent sm:text-3xl">
         English-language comedy nights in Kraków
       </h1>
-      <section className="rounded-2xl border-2 border-cyan-500/35 bg-zinc-900/60 p-4 text-base leading-relaxed text-zinc-100 ring-1 ring-cyan-500/10 sm:p-6">
-        We are here to provide information about English language comedy events in Krakow. For full details,
-        lineups, entry rules, and updates, always check each individual organiser event page directly.
+      <section className="space-y-4 rounded-2xl border-2 border-cyan-500/35 bg-zinc-900/60 p-4 text-base leading-relaxed text-zinc-100 ring-1 ring-cyan-500/10 sm:p-6">
+        <p>
+          Krakow Comedy is a manually curated guide to English-language comedy in Krakow. The site exists
+          because the local scene is active but scattered: one night may be announced on Facebook, another
+          through an Instagram post, a Meetup group, a ticketing page, or a venue calendar. Instead of making
+          people search through several feeds, this guide brings the most useful public details into one
+          practical place: what is happening, when it starts, where it is, who runs it, and where to check the
+          official source.
+        </p>
+        <p>
+          The calendar covers stand-up shows, open mics, improv nights, story slams, and occasional touring
+          English-language performances. Some listings are polished ticketed shows; others are small rooms
+          where local performers try new material. That mix matters. Locals can see what is worth going to
+          this week, expats can find rooms where English is the working language, tourists can plan an evening
+          that is not only another pub crawl, and performers can spot organisers who may be accepting signup
+          requests.
+        </p>
+        <p>
+          This is not an automatic scrape of every event with the word comedy in it. Listings are chosen and
+          checked by hand for relevance to the English-speaking comedy scene in Krakow. The focus is on events
+          that a real person could reasonably attend, perform at, or use to understand the local scene. When an
+          event is vague, duplicated, expired, or missing an official source, it may be left out until it can be
+          verified.
+        </p>
+        <p>
+          The guide also tries to add context that a raw calendar cannot. A visitor may not know whether a
+          night is a casual open mic, a prepared showcase, an improv format, or a themed storytelling event. A
+          performer may need to know which organiser to contact before asking for stage time. A new resident
+          may simply want to find a friendly English-speaking room without joining every local group first.
+          Those are the everyday problems this site is meant to solve.
+        </p>
+        <p>
+          Krakow has a compact but varied comedy scene, and the most useful information is often local and
+          practical: neighbourhood, venue style, show format, organiser, and the official link to follow for
+          updates. The listings here are written with that in mind. They are not reviews, paid placements, or
+          claims that an event will be good. They are a curated starting point for deciding what to check next.
+        </p>
+        <p>
+          Comedy listings can change quickly. Venues move rooms, lineups change, start times shift, and some
+          open mics use the event discussion as the performer signup list. Use this site as a clear starting
+          point, then check the organiser&apos;s official event page before travelling, buying tickets, or asking
+          for a spot. {editorialNote}
+        </p>
       </section>
 
       <section className="space-y-4 sm:space-y-5">
         <div>
           <h2 className="text-xl font-semibold tracking-tight text-zinc-50 sm:text-2xl">Upcoming in Krakow</h2>
-          <p className="mt-1 text-sm text-zinc-500">The next shows we know about.</p>
+          <p className="mt-1 text-sm text-zinc-500">
+            The next manually checked English-language listings, with links back to organiser sources.
+          </p>
         </div>
         <div className="grid gap-4 sm:gap-5 md:grid-cols-2">
           {upcoming.slice(0, 8).map((event) => (
@@ -131,7 +174,9 @@ export default async function Home() {
               <h3 className="text-lg font-semibold tracking-tight text-zinc-50">
                 {organiser.slug === "cozy-events" ? "Cozy Events (Story Slam)" : organiser.name}
               </h3>
-              <p className="mt-4 text-sm leading-relaxed text-zinc-400">{organiser.description}</p>
+              <p className="mt-4 text-sm leading-relaxed text-zinc-400">
+                {getOrganiserDescription(organiser)}
+              </p>
               <div className="mt-4">
                 <ExternalLinks
                   websiteUrl={websiteUrl}
@@ -204,7 +249,9 @@ export default async function Home() {
                 {venue.address}
                 {venue.area ? ` · ${venue.area}` : ""}
               </p>
-              <p className="mt-4 text-sm leading-relaxed text-zinc-400">{venue.description}</p>
+              <p className="mt-4 text-sm leading-relaxed text-zinc-400">
+                {getVenueDescription(venue)}
+              </p>
               <div className="mt-4">
                 <ExternalLinks
                   websiteUrl={venue.websiteUrl}

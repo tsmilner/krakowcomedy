@@ -1,43 +1,52 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Contact",
+  title: "Contact and Submit Events",
   description:
-    "Contact Krakow Comedy Calendar for corrections, new listings, or broken links — include official sources so updates stay accurate.",
+    "Submit an English-language comedy event in Krakow, request a correction, or send organiser and venue updates for Krakow Comedy.",
   alternates: { canonical: "/contact" },
 };
 
 export default function ContactPage() {
   return (
-    <article className="space-y-5 rounded-2xl border border-violet-500/30 bg-zinc-900/70 p-5 shadow-[0_0_28px_-10px_rgba(124,58,237,0.35)] ring-1 ring-cyan-500/10 sm:p-7">
+    <article className="space-y-6 rounded-2xl border border-violet-500/30 bg-zinc-900/70 p-5 shadow-[0_0_28px_-10px_rgba(124,58,237,0.35)] ring-1 ring-cyan-500/10 sm:p-7">
       <h1 className="bg-gradient-to-r from-white via-violet-100 to-cyan-200 bg-clip-text text-3xl font-semibold tracking-tight text-transparent">
-        Contact
+        Contact / Submit an Event
       </h1>
-      <p className="text-zinc-200">
-        Found an outdated listing, wrong link, or missing event? Send an update and we will correct it.
-      </p>
-      <div className="space-y-2 text-zinc-300">
+      <div className="space-y-4 text-zinc-300">
+        <p className="text-zinc-200">
+          Use this page to request corrections, submit English-language comedy shows, or update organiser and
+          venue information. There is no public form yet, so email is the simplest placeholder contact method.
+        </p>
         <p>
-          Best way to reach us:{" "}
+          Organisers can send new listings, changed start times, cancelled events, updated venue details, or
+          better official links. Performers can submit shows if there is a public source page and the event is
+          relevant to English-speaking comedy audiences in Krakow.
+        </p>
+        <div className="rounded-xl border border-cyan-500/25 bg-zinc-950/50 p-4">
+          <p className="font-semibold text-zinc-100">Email placeholder</p>
           <a
             href="mailto:hello@krakowcomedy.com"
             className="text-cyan-200 underline decoration-violet-500/40 underline-offset-2 hover:text-fuchsia-200"
           >
             hello@krakowcomedy.com
           </a>
+        </div>
+        <div>
+          <p className="font-semibold text-zinc-100">Please include:</p>
+          <ul className="mt-2 list-disc space-y-1 pl-5">
+            <li>Event title, date, start time, and expected end time if known</li>
+            <li>Venue name and address</li>
+            <li>Organiser name and official source link</li>
+            <li>Whether it is stand-up, open mic, improv, story slam, or another comedy format</li>
+            <li>What needs changing if you are reporting a correction</li>
+          </ul>
+        </div>
+        <p className="text-zinc-400">
+          Submissions are reviewed manually. The site may decline listings that are off-topic, unverifiable,
+          duplicated, expired, or not useful for the English-speaking Krakow comedy scene.
         </p>
-        <p>Please include:</p>
-        <ul className="list-disc space-y-1 pl-5">
-          <li>Event or organiser name</li>
-          <li>What should be changed</li>
-          <li>Official source link (Facebook/Instagram/Meetup/event page)</li>
-        </ul>
       </div>
-      <p className="text-zinc-400">
-        We aim to keep information accurate, but event details can change quickly. Always verify the latest
-        details on the organiser&apos;s official event page.
-      </p>
     </article>
   );
 }
-

@@ -4,9 +4,11 @@ import Link from "next/link";
 const links = [
   { href: "/#calendar", label: "Calendar" },
   { href: "/organisers", label: "Organisers" },
+  { href: "/venues", label: "Venues" },
   { href: "/touring-comics", label: "Touring Comics" },
+  { href: "/about", label: "About" },
+  { href: "/contact", label: "Submit" },
   { href: "/#map", label: "Map" },
-  { href: "/#venues", label: "Venues" },
 ];
 
 export function SiteHeader() {

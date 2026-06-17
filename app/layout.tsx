@@ -4,6 +4,7 @@ import Link from "next/link";
 import "./globals.css";
 import { SeoJsonLd } from "@/components/seo-json-ld";
 import { SiteHeader } from "@/components/site-header";
+import { editorialNote } from "@/lib/editorial";
 import { getSiteUrl } from "@/lib/site";
 
 const geistSans = Geist({
@@ -116,18 +117,39 @@ export default function RootLayout({
               About
             </Link>
             <Link
+              href="/contact"
+              className="underline decoration-violet-500/40 underline-offset-2 hover:text-cyan-200"
+            >
+              Contact / Submit
+            </Link>
+            <Link
+              href="/organisers"
+              className="underline decoration-violet-500/40 underline-offset-2 hover:text-cyan-200"
+            >
+              Organisers
+            </Link>
+            <Link
+              href="/venues"
+              className="underline decoration-violet-500/40 underline-offset-2 hover:text-cyan-200"
+            >
+              Venues
+            </Link>
+            <Link
+              href="/calendar"
+              className="underline decoration-violet-500/40 underline-offset-2 hover:text-cyan-200"
+            >
+              Calendar
+            </Link>
+            <Link
               href="/how-this-site-works"
               className="underline decoration-violet-500/40 underline-offset-2 hover:text-cyan-200"
             >
               How this site works
             </Link>
-            <Link
-              href="/contact"
-              className="underline decoration-violet-500/40 underline-offset-2 hover:text-cyan-200"
-            >
-              Contact
-            </Link>
           </nav>
+          <p className="mx-auto mt-4 max-w-3xl text-center text-xs leading-5 text-zinc-500">
+            {editorialNote} Always verify event details with the organiser before attending.
+          </p>
         </footer>
       </body>
     </html>
