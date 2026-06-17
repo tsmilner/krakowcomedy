@@ -250,7 +250,7 @@ async function main() {
     }),
     prisma.event.create({
       data: {
-        title: "Krakow Story Slam: The Light Returns",
+        title: 'Krakow Story Slam: Theme - "The Light Returns"',
         slug: "krakow-story-slam-the-light-returns-2026-06-26",
         description:
           "English-language Krakow Story Slam night with the theme The Light Returns.",
