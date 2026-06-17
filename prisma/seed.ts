@@ -250,6 +250,22 @@ async function main() {
     }),
     prisma.event.create({
       data: {
+        title: "Krakow Story Slam: The Light Returns",
+        slug: "krakow-story-slam-the-light-returns-2026-06-26",
+        description:
+          "English-language Krakow Story Slam night with the theme The Light Returns.",
+        startDateTime: new Date("2026-06-26T19:00:00+02:00"),
+        endDateTime: new Date("2026-06-26T21:30:00+02:00"),
+        eventType: EventType.STORY_SLAM,
+        language: EventLanguage.ENGLISH,
+        facebookEventUrl: "https://www.facebook.com/events/1531819255155782",
+        externalSourceName: "Facebook event",
+        venue: { connect: { slug: "the-atrium-hotel" } },
+        organiser: { connect: { slug: "cozy-events" } },
+      },
+    }),
+    prisma.event.create({
+      data: {
         title: "Not Gay At All Open Mic",
         slug: "not-gay-at-all-open-mic-2026-05-20",
         description: "English stand-up open mic by Luke Dwornik-Longacre and Stanislav Kelberg.",
