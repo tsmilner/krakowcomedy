@@ -3,8 +3,9 @@ import { EventLanguage, EventType, PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient();
 
 /**
- * Seeds agreed organisers + tags only. No events and no venues — those come from
- * Admin or `npm run sync:facebook` (Meta Graph API with your token).
+ * Seeds organisers, venues, and events with direct facebook.com/events/{id} URLs only.
+ * For incremental adds after initial seed, use `npx tsx scripts/import-researched-events.ts`
+ * or `npm run sync:facebook` (Meta Graph API with your token).
  */
 async function main() {
   await prisma.eventTag.deleteMany();
@@ -232,24 +233,6 @@ async function main() {
     }),
     prisma.event.create({
       data: {
-        title: "Krakow Story Slam: Don't Tell My Mother!",
-        slug: "krakow-story-slam-dont-tell-my-mother-2026-06-12",
-        description:
-          "English-language true-story open mic with seven-minute stories inspired by the theme Don't Tell My Mother!",
-        startDateTime: new Date("2026-06-12T19:00:00+02:00"),
-        endDateTime: new Date("2026-06-12T21:00:00+02:00"),
-        eventType: EventType.STORY_SLAM,
-        language: EventLanguage.ENGLISH,
-        instagramUrl: "https://www.instagram.com/reel/DZD9-z4ioDA/",
-        websiteUrl: "https://www.instagram.com/krakowstoryslam/",
-        externalSourceName: "Krakow Story Slam Instagram",
-        isRecurring: true,
-        venue: { connect: { slug: "the-atrium-hotel" } },
-        organiser: { connect: { slug: "cozy-events" } },
-      },
-    }),
-    prisma.event.create({
-      data: {
         title: 'Krakow Story Slam: Theme - "The Light Returns"',
         slug: "krakow-story-slam-the-light-returns-2026-06-26",
         description:
@@ -291,23 +274,6 @@ async function main() {
         instagramUrl: "https://www.instagram.com/p/DYqMDfBNrBn/",
         externalSourceName: "Facebook / Instagram",
         sourceNotes: "Co-hosted by Luke Dwornik-Longacre and Stan Kelberg.",
-        venue: { connect: { slug: "chicago-jazz" } },
-        organiser: { connect: { slug: "not-gay-at-all-comedy" } },
-      },
-    }),
-    prisma.event.create({
-      data: {
-        title: "English Stand-Up Comedy Competition",
-        slug: "english-stand-up-comedy-competition-2026-06-12",
-        description:
-          "English stand-up comedy competition hosted by Luke Dwornik-Longacre and Stan Kelberg.",
-        startDateTime: new Date("2026-06-12T20:00:00+02:00"),
-        endDateTime: new Date("2026-06-12T22:00:00+02:00"),
-        eventType: EventType.SHOWCASE,
-        language: EventLanguage.ENGLISH,
-        instagramUrl: "https://www.instagram.com/p/DY94a8ZNMlA/",
-        externalSourceName: "Instagram",
-        sourceNotes: "Seating from 19:30; hosted by Luke Dwornik-Longacre and Stan Kelberg.",
         venue: { connect: { slug: "chicago-jazz" } },
         organiser: { connect: { slug: "not-gay-at-all-comedy" } },
       },
@@ -359,51 +325,20 @@ async function main() {
     }),
     prisma.event.create({
       data: {
-        title: "Omnibus Musical Improv Comedy Show",
-        slug: "omnibus-musical-improv-comedy-show-2026-06-11",
+        title: 'Krakow Story Slam: "The Most Out of Place I Felt."',
+        slug: "krakow-story-slam-the-most-out-of-place-i-felt-2026-07-24",
         description:
-          "English-language musical improv comedy show created live from audience suggestions.",
-        startDateTime: new Date("2026-06-11T20:00:00+02:00"),
-        endDateTime: new Date("2026-06-11T22:00:00+02:00"),
-        eventType: EventType.IMPROV,
+          "English-language true-story open mic with the theme The Most Out of Place I Felt. Stories are 5–7 minutes; audience judges score each tale.",
+        startDateTime: new Date("2026-07-24T19:00:00+02:00"),
+        endDateTime: new Date("2026-07-24T21:30:00+02:00"),
+        eventType: EventType.STORY_SLAM,
         language: EventLanguage.ENGLISH,
-        facebookEventUrl: "https://www.facebook.com/omnibus.musical.improv",
-        instagramUrl: "https://www.instagram.com/omnibus_improv/",
+        facebookEventUrl: "https://www.facebook.com/events/1998006590835841/",
+        websiteUrl: "https://www.facebook.com/events/1998006590835841/",
         externalSourceName: "Facebook",
-        venue: { connect: { slug: "swietego-tomasza-31" } },
-        organiser: { connect: { slug: "omnibus-musical-improv" } },
-      },
-    }),
-    prisma.event.create({
-      data: {
-        title: "Make Immigrants Great Again",
-        slug: "make-immigrants-great-again-2026-06-28",
-        description: "English stand-up comedy show by Miguel Aliaga.",
-        startDateTime: new Date("2026-06-28T20:30:00+02:00"),
-        endDateTime: new Date("2026-06-28T22:30:00+02:00"),
-        eventType: EventType.STAND_UP,
-        language: EventLanguage.ENGLISH,
-        ticketUrl: "https://www.eventbrite.com/d/poland--krak%C3%B3w/comedy/",
-        websiteUrl: "https://www.eventbrite.com/d/poland--krak%C3%B3w/comedy/",
-        externalSourceName: "Eventbrite",
-        venue: { connect: { slug: "pub-103-8-fm" } },
-        organiser: { connect: { slug: "miguel-aliaga" } },
-      },
-    }),
-    prisma.event.create({
-      data: {
-        title: "Stand-Up Comedy in Broken English: Victor Patrascan",
-        slug: "stand-up-comedy-in-broken-english-victor-patrascan-2026-09-14",
-        description: "English stand-up comedy by touring comedian Victor Patrascan.",
-        startDateTime: new Date("2026-09-14T20:00:00+02:00"),
-        endDateTime: new Date("2026-09-14T22:00:00+02:00"),
-        eventType: EventType.STAND_UP,
-        language: EventLanguage.ENGLISH,
-        ticketUrl: "https://fienta.com/stand-up-comedy-in-broken-english-victor-patrascan-in-krakow",
-        websiteUrl: "https://fienta.com/stand-up-comedy-in-broken-english-victor-patrascan-in-krakow",
-        externalSourceName: "Fienta",
-        venue: { connect: { slug: "forum-horyzonty" } },
-        organiser: { connect: { slug: "victor-patrascan" } },
+        sourceNotes: "facebookEventId:1998006590835841; user-supplied link.",
+        venue: { connect: { slug: "the-atrium-hotel" } },
+        organiser: { connect: { slug: "cozy-events" } },
       },
     }),
   ]);
