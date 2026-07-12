@@ -50,9 +50,33 @@ type ImportVenue = {
 };
 
 /** Add rows here only with a confirmed facebook.com/events/… URL. */
-const venues: ImportVenue[] = [];
+const venues: ImportVenue[] = [
+  {
+    slug: "plac-mariacki-8",
+    name: "Plac Mariacki 8",
+    address: "plac Mariacki 8, 31-042 Kraków, Polska",
+    latitude: 50.061276,
+    longitude: 19.9391805,
+    area: "Old Town",
+    description: "Central Old Town address listed on Facebook for Krak Me Up Comedy open mic nights.",
+  },
+];
 
 const events: ImportEvent[] = [
+  {
+    slug: "unknown-comedy-show-2026-08-20",
+    title: "Unknown Comedy Show",
+    description:
+      "English Stand-Up Comedy & Art Open Mic by Krak Me Up Comedy, hosted by Oliver Haze and Konrad Beerski.",
+    start: "2026-08-20T19:30:00+02:00",
+    eventType: EventType.OPEN_MIC,
+    organiserSlug: "krak-me-up-comedy",
+    venueSlug: "plac-mariacki-8",
+    facebookEventUrl: "https://www.facebook.com/events/1906914996838161/",
+    websiteUrl: "https://www.facebook.com/events/1906914996838161/",
+    externalSourceName: "Facebook",
+    sourceNotes: "facebookEventId:1906914996838161; user-supplied link.",
+  },
   {
     slug: "krakow-story-slam-the-most-out-of-place-i-felt-2026-07-24",
     title: 'Krakow Story Slam: "The Most Out of Place I Felt."',
@@ -68,6 +92,20 @@ const events: ImportEvent[] = [
     externalSourceName: "Facebook",
     sourceNotes: "facebookEventId:1998006590835841; user-supplied link.",
   },
+  {
+    slug: "english-stand-up-comedy-open-mic-krakow-2026-09-04",
+    title: "English Stand-Up Comedy Open Mic – Kraków",
+    description:
+      "English stand-up comedy open mic hosted by Love/Lub Comedy and Hung Yu-Yu at Chicago Jazz.",
+    start: "2026-09-04T20:00:00+02:00",
+    eventType: EventType.OPEN_MIC,
+    organiserSlug: "love-lub-comedy",
+    venueSlug: "chicago-jazz",
+    facebookEventUrl: "https://www.facebook.com/events/1056381186731553/",
+    websiteUrl: "https://www.facebook.com/events/1056381186731553/",
+    externalSourceName: "Facebook",
+    sourceNotes: "facebookEventId:1056381186731553; user-supplied fb.me/e/77nYCeP8r link.",
+  },
 ];
 
 /** Events added without a direct Facebook event URL — removed from calendar. */
@@ -78,9 +116,7 @@ const removeSlugs = [
   "omnibus-course-graduation-show-2026-07-09",
   "omnibus-medieval-tale-ivy-bar-2026-07-15",
   "discount-comedy-open-mic-2026-07-11",
-  "unknown-comedy-show-2026-08-20",
   "mystery-comedy-show-open-mic-2026-09-17",
-  "english-stand-up-comedy-open-mic-krakow-2026-09-04",
 ];
 
 async function main() {
