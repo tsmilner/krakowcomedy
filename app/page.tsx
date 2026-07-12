@@ -11,6 +11,9 @@ import { formatEventDate, toKrakowDatetimeLocalValue } from "@/lib/utils";
 
 const NON_LOCAL_ORGANISER_SLUGS = ["love-lub-comedy", "miguel-aliaga", "victor-patrascan"];
 
+/** Homepage lists DB-backed events; refresh without a full redeploy after imports. */
+export const revalidate = 60;
+
 export const metadata: Metadata = {
   alternates: { canonical: "/" },
   description:
