@@ -150,7 +150,12 @@ export default async function EventDetailPage({ params }: EventDetailProps) {
         <p className="max-w-3xl text-base leading-relaxed text-zinc-300">
           {getEventLocalContext(event)}
         </p>
-        <p className="max-w-3xl text-base leading-relaxed text-zinc-400">{event.description}</p>
+        <details className="event-description max-w-3xl rounded-xl border border-zinc-700/80 bg-zinc-950/45 px-4 py-3 text-base text-zinc-400">
+          <summary className="cursor-pointer list-none text-sm font-semibold uppercase tracking-wide text-cyan-200">
+            Event description
+          </summary>
+          <p className="mt-3 leading-relaxed">{event.description}</p>
+        </details>
       </section>
 
       <section className="grid gap-4 md:grid-cols-2">

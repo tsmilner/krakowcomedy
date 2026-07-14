@@ -68,7 +68,11 @@ export default async function Home() {
       <h1 className="bg-gradient-to-r from-white via-violet-100 to-cyan-200 bg-clip-text text-center text-2xl font-semibold tracking-tight text-transparent sm:text-3xl">
         English-language comedy nights in Kraków
       </h1>
-      <section className="space-y-4 rounded-2xl border-2 border-cyan-500/35 bg-zinc-900/60 p-4 text-base leading-relaxed text-zinc-100 ring-1 ring-cyan-500/10 sm:p-6">
+      <details className="event-description rounded-xl border border-zinc-700/80 bg-zinc-900/65 p-4 text-base leading-relaxed text-zinc-100 ring-1 ring-white/5 sm:p-5">
+        <summary className="cursor-pointer list-none text-sm font-semibold uppercase tracking-wide text-cyan-200">
+          About this calendar
+        </summary>
+        <div className="mt-4 space-y-4">
         <p>
           Krakow Comedy is a manually curated guide to English-language comedy in Krakow. The site exists
           because the local scene is active but scattered: one night may be announced on Facebook, another
@@ -111,7 +115,8 @@ export default async function Home() {
           point, then check the organiser&apos;s official event page before travelling, buying tickets, or asking
           for a spot. {editorialNote}
         </p>
-      </section>
+        </div>
+      </details>
 
       <section className="space-y-4 sm:space-y-5">
         <div>
