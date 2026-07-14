@@ -64,6 +64,21 @@ const venues: ImportVenue[] = [
 
 const events: ImportEvent[] = [
   {
+    slug: "discount-comedy-2026-07-25",
+    title: "Discount Comedy",
+    description:
+      "A reduced-cost stand-up comedy night featuring raw stand-up, audience interaction, and playful uncertainty. The format gives every performer opportunities to showcase different sides of themselves.",
+    start: "2026-07-25T19:30:00+02:00",
+    end: "2026-07-25T21:15:00+02:00",
+    eventType: EventType.STAND_UP,
+    organiserSlug: "krak-me-up-comedy",
+    venueSlug: "baza-pub",
+    facebookEventUrl: "https://www.facebook.com/events/1416584120295737/",
+    websiteUrl: "https://www.facebook.com/events/1416584120295737/",
+    externalSourceName: "Facebook",
+    sourceNotes: "facebookEventId:1416584120295737; user-supplied link and screenshot.",
+  },
+  {
     slug: "unknown-comedy-show-2026-08-20",
     title: "Unknown Comedy Show",
     description:
@@ -105,6 +120,20 @@ const events: ImportEvent[] = [
     websiteUrl: "https://www.facebook.com/events/1056381186731553/",
     externalSourceName: "Facebook",
     sourceNotes: "facebookEventId:1056381186731553; user-supplied fb.me/e/77nYCeP8r link.",
+  },
+  {
+    slug: "improv-comedy-in-english-open-stage-2026-08-06",
+    title: "Improv Comedy in English - Open Stage",
+    description:
+      "English-language improv comedy open stage at Cafe Szafe. Everyone can participate in improvised games inspired by Whose Line Is It Anyway; games are explained and demonstrated by local improvisers, so no previous improv experience is needed. Entry is free, with pay-what-you-want contributions after the show.",
+    start: "2026-08-06T20:00:00+02:00",
+    eventType: EventType.IMPROV,
+    organiserSlug: "improv-comedy-in-cracow",
+    venueSlug: "cafe-szafe",
+    facebookEventUrl: "https://www.facebook.com/events/2587976331639427/",
+    websiteUrl: "https://www.facebook.com/events/2587976331639427/",
+    externalSourceName: "Facebook",
+    sourceNotes: "facebookEventId:2587976331639427; user-supplied link and event details.",
   },
 ];
 
