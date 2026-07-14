@@ -52,6 +52,15 @@ type ImportVenue = {
 /** Add rows here only with a confirmed facebook.com/events/… URL. */
 const venues: ImportVenue[] = [
   {
+    slug: "baza-pub",
+    name: "Baza Pub",
+    address: "Florianska 15, 31-019 Krakow, Polska",
+    latitude: 50.063662,
+    longitude: 19.939012,
+    area: "Old Town",
+    description: "Central Krakow pub venue hosting English-language stand-up and comedy events.",
+  },
+  {
     slug: "plac-mariacki-8",
     name: "Plac Mariacki 8",
     address: "plac Mariacki 8, 31-042 Kraków, Polska",
